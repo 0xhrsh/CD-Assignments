@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "r_lc.h"
+#include "r_mc.h"
+#include "rs.h"
                         
 int main(){
     char file[20] = "temp.c";

@@ -1,0 +1,1 @@
+void remove_multi_line_comments(char*);
