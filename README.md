@@ -11,7 +11,7 @@ You can just run ```chmod +x run.sh && ./run.sh``` to run all commands or you ca
 Find the solution to Q2 in the ```q2``` directory.
 
 ## Note:
-Enter the code in a file named ```temp.c```, Note you can choose any file of your choice by changing file name in line 6 of ```main.c```.
+Enter the code in a file named ```temp.c```, Note you can choose any file of your choice by changing file name in line 9 of ```main.c```.
 
 
 ## Instructions to comile and run:
