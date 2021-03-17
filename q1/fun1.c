@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int func2(){
-    printf("This is from func2\n");
+int fun1(){
+    printf("This is from func1\n");
     return 0;
 }

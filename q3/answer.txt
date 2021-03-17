@@ -8,10 +8,10 @@ With at most one production, we can generate {wcd<S>, b<L>e, s}. Only 1 out of t
 Strings with two productions: {wcdwcd<S>, wcdb<L>e, wcds, b<L>;<S>e, b<S>e}
 Strings with one productions: {wcd<S>, b<L>e, s} (from above)
 At most two : two productions (union) one productions (union) zero productions.
-
+At most two: {wcdwcd<S>, wcdb<L>e, wcds, b<L>;<S>e, b<S>e, wcd<S>, b<L>e, s}
 Set of terminal strings with atmost two productions: {wcds, s}
 
 4) At most three productions
-Strings with three productions: {wcdwcdwcd<S>, wcdwcdb<L>e, wcdwcds, wcdb<L>;<S>e, wcdb<S>e, bwcd<S>e, bb<L>ee, bse, b<L>;<S>se, b<S><S>e, b<L>wcd<S>e, b<L>b<L>ee, b<L>se}
+Strings with three productions: {wcdwcdwcd<S>, wcdwcdb<L>e, wcdwcds, wcdb<L>;<S>e, wcdb<S>e, bwcd<S>e, bb<L>ee, bse, b<L>;<S><S>e, b<S><S>e, b<L>wcd<S>e, b<L>b<L>ee, b<L>se}
 
 Set of terminal strings with atmost three productions: {wcdwcds, bse, wcds, s}
