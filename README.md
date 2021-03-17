@@ -2,10 +2,10 @@
 Find the solution to Q1 in the ```q1``` directory.
 ## Instructions to comile and run:
 You can just run ```chmod +x run.sh && ./run.sh``` to run all commands or you can manually have all commands as follows:
-- ```gcc -c func1.c```
-- ```gcc -c func2.c```
+- ```gcc -c fun1.c```
+- ```gcc -c fun2.c```
 - ```gcc -c main.c```
-- ```gcc main.o func1.o func2.o -o out && ./out```
+- ```gcc main.o fun1.o fun2.o -o out && ./out```
 
 # Q2
 Find the solution to Q2 in the ```q2``` directory.
