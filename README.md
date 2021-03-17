@@ -1,6 +1,6 @@
 # Q1
 Find the solution to Q1 in the ```q1``` directory.
-## Instructions to comile and run:
+## Instructions to compile and run:
 You can just run ```chmod +x run.sh && ./run.sh``` to run all commands or you can manually have all commands as follows:
 - ```gcc -c fun1.c```
 - ```gcc -c fun2.c```
