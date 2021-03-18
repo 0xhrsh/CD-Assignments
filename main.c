@@ -6,20 +6,8 @@
 #define mem(v,i) memset(v,i,sizeof(v))
 #define MAX_STATES 1000
 #define nl printf("\n")
-#define STAR_LINE printf("***************************\n")
+#define STAR_LINE printf("\n\n***************************\n")
 #define DASH_LINE printf("-----------------------\n")
-
-
-void get_closure(bool closure[][MAX_STATES], int n){
-    int i, j, k;
-     for (k = 0; k < n; k++){
-        for (i = 0; i < n; i++){
-            for (j = 0; j < n; j++){
-                closure[i][j] = closure[i][j] || (closure[i][k] && closure[k][j]);
-            }
-        }
-    }
-}
 
 
 int main(){
@@ -46,7 +34,6 @@ int main(){
     scanf("%d", &s);
 
     int symbols[s];
-    ;
     printf("Enter the characters for symbols (space seperated) [excluding ε]:");
     for(int i = 0; i < s; i++){
         getchar();
@@ -55,14 +42,13 @@ int main(){
     
 
     bool transitions[n][s][n];
-    bool closure[n][MAX_STATES];
+    bool closure[n][n];
     mem(transitions, 0);
     mem(closure, 0);
 
     printf("Enter the transitions states for the given symbol:\n\n");
     printf("Make sure the states are space seperated and add -1 after entering all states\n");
     printf("Example 2 3 -1\n\n");
-
 
     for(int i = 0; i < n; i++){
         int inp;
@@ -84,30 +70,30 @@ int main(){
             scanf("%d", &inp);
         }
         closure[i][i] = true;
-        printf("\n");
+        nl;
     }
 
-    get_closure(closure, n);
-
+    for (int k = 0; k < n; k++){
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < n; j++){
+                closure[i][j] = closure[i][j] || (closure[i][k] && closure[k][j]);
+            }
+        }
+    }
 
     // Uncomment to check input
-
     // for(int i = 0; i < n; i++){
+    //     printf("For state %d:\n", i);
     //     for(int j = 0; j < s; j++){
     //         for(int k = 0; k < n; k++){
     //             printf("%d ",transitions[i][j][k]);
-    //         }
-    //         printf("\n");
+    //         }nl;
     //     }
     //     for(int j = 0; j < n; j++)
     //         printf("%d ",closure[i][j]);
-    //     nl;
-    //     printf("\n");
+    //     nl;nl;
     // }
 
-
-
-    // now make states with closures
     int n_dfa_states = 1;
 
     bool dfa_state_matching[MAX_STATES][n];
@@ -115,7 +101,6 @@ int main(){
 
     bool dfa_table[MAX_STATES][s][MAX_STATES];
     mem(dfa_table, 0);
-
 
     int q[100000];
     int qstart = 0;
@@ -125,7 +110,7 @@ int main(){
     q[qstart] = 0;
     qend++;
     for(int i = 0; i < n; i++){
-        dfa_state_matching[0][i] = closure[start_state][i];
+        dfa_state_matching[0][i] = closure[start_state][i];   
     }
     
     // take a dfs_state from the queue
@@ -139,7 +124,7 @@ int main(){
             // for each state true in dfa_state_matching[curr_dfa_state]
             for(int i = 0; i < n; i++){
                 if(dfa_state_matching[curr_dfa_state][i]){
-                    // add the reachable states to a boolean array
+                    // add the reachable states to a boolean array  
                     for(int k = 0; k < n; k++){
                         if(transitions[i][j][k])
                             reachable_states[k] = true;
@@ -151,15 +136,25 @@ int main(){
             for(int i = 0; i < n; i++){
                 if(reachable_states[i]){
                     for(int k = 0; k < n; k++){
-                        reachable_states[i] = reachable_states[i] || closure[i][k];
+                        if(closure[i][k]){
+                            reachable_states[k] = true;
+                        }
+                        
+                        
                     }
-                }
+                }   
             }
+
+            // Uncomment to check reachability
+            // printf("For current state %d and symbol %c, the reachable states are:", curr_dfa_state, symbols[j]);
+            // for(int k = 0; k < n; k++)
+            //     if(reachable_states[k])
+            //         printf("%d ", k);
+            // nl;
 
 
             // if that bool array is not already present in the matching
                 // add it to the matching table and put it in the queue
-            
             bool present = false;
             int new_state;
 
@@ -194,22 +189,12 @@ int main(){
                 qend++;
                 
             }
-
-            //Uncomment to check reachability
-
-            // printf("For current state %d and symbol %d, the reachable states are:", curr_dfa_state, j);
-            // for(int k = 0; k < n; k++)
-            //     if(reachable_states[k])
-            //         printf("%d ", k);
-            // nl;
-        
         }
     }
 
     STAR_LINE;
-
     printf("STATES");
-    for(int i = 0; i < s; i++)printf("\t %c", symbols[i]);
+    for(int i = 0; i < s; i++)printf("\t\t %c", symbols[i]);
     nl;
     DASH_LINE;
     // print stuff here
@@ -219,7 +204,7 @@ int main(){
                 printf("%d", j);
             }
         }
-        printf(":\t");
+        printf("\t\t");
         for(int j = 0; j < s; j++){
             for(int k = 0; k < n_dfa_states; k++){
                 if(dfa_table[i][j][k]){
@@ -231,7 +216,7 @@ int main(){
                     
                 }
             }
-            printf("\t");
+            printf("\t\t");
         }
         printf("\n");
     }
