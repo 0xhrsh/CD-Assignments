@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#define mem(v,i) memset(v,i,sizeof(v))
 
+#define mem(v,i) memset(v,i,sizeof(v))
 #define MAX_STATES 1000
 #define nl printf("\n")
+#define STAR_LINE printf("***************************\n")
+#define DASH_LINE printf("-----------------------\n")
 
 
 void get_closure(bool closure[][MAX_STATES], int n){
@@ -18,8 +20,6 @@ void get_closure(bool closure[][MAX_STATES], int n){
         }
     }
 }
-
-
 
 
 int main(){
@@ -45,6 +45,14 @@ int main(){
     printf("Enter the number of symbols (excluding ε): ");
     scanf("%d", &s);
 
+    int symbols[s];
+    ;
+    printf("Enter the characters for symbols (space seperated) [excluding ε]:");
+    for(int i = 0; i < s; i++){
+        getchar();
+        symbols[i] = getchar();
+    }
+    
 
     bool transitions[n][s][n];
     bool closure[n][MAX_STATES];
@@ -60,7 +68,7 @@ int main(){
         int inp;
         for(int j = 0; j < s; j++){
 
-            printf("transitions of state %d for symbol %d (0 indexed):", i, j);
+            printf("transitions of state %d for symbol %c (0 indexed):", i, symbols[j]);
 
             scanf("%d", &inp);
             while(inp != -1){
@@ -198,6 +206,12 @@ int main(){
         }
     }
 
+    STAR_LINE;
+
+    printf("STATES");
+    for(int i = 0; i < s; i++)printf("\t %c", symbols[i]);
+    nl;
+    DASH_LINE;
     // print stuff here
     for(int i = 0; i < n_dfa_states; i++){
         for(int j = 0; j < n; j++){
