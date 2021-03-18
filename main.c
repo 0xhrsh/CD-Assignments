@@ -6,8 +6,8 @@
 #define mem(v,i) memset(v,i,sizeof(v))
 #define MAX_STATES 1000
 #define nl printf("\n")
-#define STAR_LINE printf("\n\n***************************\n")
-#define DASH_LINE printf("-----------------------\n")
+#define STAR_LINE printf("\n\n*************************************\n")
+#define DASH_LINE printf("-----------------------------------------\n")
 
 
 int main(){
@@ -193,6 +193,31 @@ int main(){
     }
 
     STAR_LINE;
+    printf("States for DFA:\t\t");
+    for(int i = 0; i < n_dfa_states; i++){
+        for(int j = 0; j < n ; j++){
+            if(dfa_state_matching[i][j])printf("%d ",j);
+        }printf(", ");
+    }
+    nl;
+    printf("Start State for DFA:\t");
+    for(int j = 0; j < n ; j++){
+        if(dfa_state_matching[0][j])printf("%d ",j);
+    }
+    nl;
+    printf("Final States for DFA:\t");
+    for(int i = 0; i < n_dfa_states; i++){
+        for(int j = 0; j < n_end_states ; j++){
+            if(dfa_state_matching[i][end_states[j]]){
+                for(int k = 0; k < n ; k++){
+                    if(dfa_state_matching[i][k])printf("%d ",k);
+                }
+                printf(", ");
+                break;
+            }
+        }
+    }
+    nl;nl;nl;
     printf("STATES");
     for(int i = 0; i < s; i++)printf("\t\t %c", symbols[i]);
     nl;
@@ -208,7 +233,6 @@ int main(){
         for(int j = 0; j < s; j++){
             for(int k = 0; k < n_dfa_states; k++){
                 if(dfa_table[i][j][k]){
-                    
                     for(int l = 0; l < n; l++){
                         if(dfa_state_matching[k][l])
                             printf("%d", l);
