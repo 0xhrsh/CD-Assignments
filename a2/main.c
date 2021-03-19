@@ -17,17 +17,27 @@ int main(){
     printf("Enter the number of states: ");
     scanf("%d", &n);
 
-    printf("Enter the start state (0 indexed): ");
-    scanf("%d", &start_state);
+    printf("Enter the names (should be integers) of states (space seperated): ");
+    int state_names[n];
+    int temp_var;
+    for(int i = 0; i < n ; i++){
+        scanf("%d", &state_names[i]);
+    }
+
+
+    printf("Enter the start state: ");
+    scanf("%d", &temp_var);
+    for(int tt = 0; tt < n; tt++)if(temp_var == state_names[tt])start_state = tt;
 
     printf("Enter the number of end states: ");
     scanf("%d", &n_end_states);
 
     int end_states[n_end_states];
     
-    printf("Enter the end states (space seperated) (0 indexed): ");
+    printf("Enter the end states (space seperated): ");
     for(int i = 0; i < n_end_states; i++){
-        scanf("%d", &end_states[i]);
+        scanf("%d", &temp_var);
+        for(int tt = 0; tt < n; tt++)if(temp_var == state_names[tt])end_states[i] = tt;
     }
 
     printf("Enter the number of symbols (excluding ε): ");
@@ -54,20 +64,22 @@ int main(){
         int inp;
         for(int j = 0; j < s; j++){
 
-            printf("transitions of state %d for symbol %c (0 indexed):", i, symbols[j]);
-
-            scanf("%d", &inp);
-            while(inp != -1){
+            printf("transitions of state %d for symbol %c:", state_names[i], symbols[j]);
+            scanf("%d", &temp_var);
+            while(temp_var != -1){
+                for(int tt = 0; tt < n; tt++)if(temp_var == state_names[tt])inp = tt;
+                // printf("\n==>%d %d \n",temp_var, inp);
                 transitions[i][j][inp] = true;
-                scanf("%d", &inp);
+                scanf("%d", &temp_var);
             }
         }
-        printf("transitions of state %d for symbol ε (0 indexed):", i);
+        printf("transitions of state %d for symbol ε:", state_names[i]);
         
-        scanf("%d", &inp);
-        while(inp != -1){
+        scanf("%d", &temp_var);
+        while(temp_var != -1){
+            for(int tt = 0; tt < n; tt++)if(temp_var == state_names[tt]){inp = tt;break;}
             closure[i][inp] = true;
-            scanf("%d", &inp);
+            scanf("%d", &temp_var);
         }
         closure[i][i] = true;
         nl;
@@ -83,7 +95,7 @@ int main(){
 
     // Uncomment to check input
     // for(int i = 0; i < n; i++){
-    //     printf("For state %d:\n", i);
+    //     printf("For state %d:\n", state_names[i]);
     //     for(int j = 0; j < s; j++){
     //         for(int k = 0; k < n; k++){
     //             printf("%d ",transitions[i][j][k]);
@@ -149,7 +161,7 @@ int main(){
             // printf("For current state %d and symbol %c, the reachable states are:", curr_dfa_state, symbols[j]);
             // for(int k = 0; k < n; k++)
             //     if(reachable_states[k])
-            //         printf("%d ", k);
+            //         printf("%d ", state_names[k]);
             // nl;
 
 
@@ -196,13 +208,13 @@ int main(){
     printf("States for DFA:\t\t");
     for(int i = 0; i < n_dfa_states; i++){
         for(int j = 0; j < n ; j++){
-            if(dfa_state_matching[i][j])printf("%d ",j);
+            if(dfa_state_matching[i][j])printf("%d ",state_names[j]);
         }printf(", ");
     }
     nl;
     printf("Start State for DFA:\t");
     for(int j = 0; j < n ; j++){
-        if(dfa_state_matching[0][j])printf("%d ",j);
+        if(dfa_state_matching[0][j])printf("%d ",state_names[j]);
     }
     nl;
     printf("Final States for DFA:\t");
@@ -210,7 +222,7 @@ int main(){
         for(int j = 0; j < n_end_states ; j++){
             if(dfa_state_matching[i][end_states[j]]){
                 for(int k = 0; k < n ; k++){
-                    if(dfa_state_matching[i][k])printf("%d ",k);
+                    if(dfa_state_matching[i][k])printf("%d ",state_names[k]);
                 }
                 printf(", ");
                 break;
@@ -226,7 +238,7 @@ int main(){
     for(int i = 0; i < n_dfa_states; i++){
         for(int j = 0; j < n; j++){
             if(dfa_state_matching[i][j]){
-                printf("%d", j);
+                printf("%d", state_names[j]);
             }
         }
         printf("\t\t");
@@ -235,7 +247,7 @@ int main(){
                 if(dfa_table[i][j][k]){
                     for(int l = 0; l < n; l++){
                         if(dfa_state_matching[k][l])
-                            printf("%d", l);
+                            printf("%d", state_names[l]);
                     }
                     
                 }

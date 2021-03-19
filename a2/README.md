@@ -1,7 +1,8 @@
 # Assignment 2
 
 ## Assumption:
-If there are n states in the NFA, The states will be from 0 to n-1.
+The names of the states will be integer.
+The names of symbols will be characters.
 
 ## Q1
 ```gcc main.c && ./a.out < 1.txt```
