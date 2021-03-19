@@ -59,6 +59,7 @@ int main(){
     printf("Enter the transitions states for the given symbol:\n\n");
     printf("Make sure the states are space seperated and add -1 after entering all states\n");
     printf("So if the transitions states are 2 and 3, you should enter: 2 3 -1\n");
+    printf("In case there are no transitions states, just enter -1\n");
 
     for(int i = 0; i < n; i++){
         int inp;
