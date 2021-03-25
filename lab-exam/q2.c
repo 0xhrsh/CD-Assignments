@@ -25,13 +25,22 @@ int main(){
     printf("Enter number of symbols");
     scanf("%d", &s);
 
+    int start_state;
+    printf("Enter start state");
+    scanf("%d", &start_state);
+
     int n_end;
     printf("Enter number of final states");
     scanf("%d", &n_end);
 
-    int end[n_end];
+    bool end[n];
+    mem(end, 0);
     printf("Enter %d final states (Space seperated):", n_end);
-    repp(i, n_end)scanf("%d", &end[i]);
+    repp(i, n_end){
+        int ts;
+        scanf("%d", &ts);
+        end[ts] = true;
+    }
 
 
     int dfa[n][s];
@@ -43,35 +52,85 @@ int main(){
         }
     }
 
-    bool partitions[n][n];
-    mem(partitions, 0);
+    bool isSame[n][n];
+    mem(isSame, 0);
 
-    int ps[n];
+    int counted[n];
+    repp(i, n)counted[i] = -1;
+    
 
     repp(i, n){
-        partitions[1][i] = true;
-        ps[i] = 1;
-    }
-    repp(i, n_end){
-        partitions[1][end[i]] = false;
-        partitions[0][end[i]] = true;
-        ps[end[i]] = 0;
-    }
-
-    bool hasChanged = true;
-    int k = 1;
-    while(hasChanged){
-        repp(i, n){
-            if(partitions[k][i]){
-                repp(j, n){
-                    repp(si, s){
-                        if(ps[dfa[i][si]] != ps[])
+        rep(j,i+1, n){
+            if(counted[j] != -1)continue;
+            bool same = true;
+            repp(k, s){
+                if(dfa[i][k] != dfa[j][k]){
+                    same = false;
+                    if((dfa[i][k] == j && dfa[j][k] == i)){ //  || isSame[dfa[i][k]][dfa[j][k]] || (dfa[i][k] == i && dfa[j][k] == j)
+                        same = true;
+                    } else{
+                        break;
                     }
+                    
+                }
+                if(same){
+                    isSame[i][j] = true;
+                    counted[j] = i;
                 }
             }
-            
         }
     }
 
-    return 0;
+    line;
+    printf("States of minimised DFA:\t");
+    repp(i, n){
+        if(counted[i] != -1) continue;
+        printf("%d", i);
+        repp(j, n){
+            if(isSame[i][j])printf("%d", j);
+        }
+        printf(" ");
+    }
+        
+
+    line;
+
+    printf("DFA Table:\n");
+    
+    printf("STATE");
+    repp(j,s)printf("\t\t%d", j);
+    nl;
+
+    repp(i, n){
+        if(counted[i] != -1)continue;
+
+        printf("%d", i);
+        repp(j, n){
+            if(isSame[i][j])printf("%d", j);
+        }
+        printf(":");
+
+        repp(j, s){
+            if(dfa[i][j] == -1){
+                printf("\t\t-1");
+            } else {
+                if (counted[dfa[i][j]] == -1){
+                    printf("\t\t%d", dfa[i][j]);
+                    repp(k, n){
+                        if(isSame[dfa[i][j]][k])printf("%d", k);
+                    }
+                }
+                else{
+                    int tv = counted[dfa[i][j]];
+                    printf("\t\t%d", tv);
+                    repp(k, n){
+                        if(isSame[tv][k])printf("%d", k);
+                    }
+                }
+            }
+                
+                
+        }
+        nl;
+    }
 }
