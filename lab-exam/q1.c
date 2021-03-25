@@ -27,6 +27,24 @@ int main(){
     printf("Enter number of symbols");
     scanf("%d", &s);
 
+    int start_state;
+    printf("Enter start state");
+    scanf("%d", &start_state);
+
+    int n_end;
+    printf("Enter number of final states");
+    scanf("%d", &n_end);
+
+    bool end[n];
+    mem(end, 0);
+    printf("Enter %d final states (Space seperated):", n_end);
+    repp(i, n_end){
+        int ts;
+        scanf("%d", &ts);
+        end[ts] = true;
+    }
+
+
 
     int dfa[n][s];
 
@@ -39,6 +57,7 @@ int main(){
 
     bool isVisited[n];
     mem(isVisited, 0);
+    isVisited[start_state] = true;
 
     repp(i, n){
         repp(j, s){

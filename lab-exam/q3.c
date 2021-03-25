@@ -27,6 +27,9 @@ int main(){
     printf("Enter number of symbols");
     scanf("%d", &s);
 
+    int start_state;
+    printf("Enter start state");
+    scanf("%d", &start_state);
 
     int n_end;
     printf("Enter number of final states");
