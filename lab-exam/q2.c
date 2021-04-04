@@ -66,7 +66,7 @@ int main(){
             repp(k, s){
                 if(dfa[i][k] != dfa[j][k]){
                     same = false;
-                    if((dfa[i][k] == j && dfa[j][k] == i)){ //  || isSame[dfa[i][k]][dfa[j][k]] || (dfa[i][k] == i && dfa[j][k] == j)
+                    if((dfa[i][k] == j && dfa[j][k] == i)){
                         same = true;
                     } else{
                         break;

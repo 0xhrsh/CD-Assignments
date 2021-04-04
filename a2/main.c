@@ -95,17 +95,17 @@ int main(){
     }
 
     // Uncomment to check input
-    // for(int i = 0; i < n; i++){
-    //     printf("For state %d:\n", state_names[i]);
-    //     for(int j = 0; j < s; j++){
-    //         for(int k = 0; k < n; k++){
-    //             printf("%d ",transitions[i][j][k]);
-    //         }nl;
-    //     }
-    //     for(int j = 0; j < n; j++)
-    //         printf("%d ",closure[i][j]);
-    //     nl;nl;
-    // }
+    for(int i = 0; i < n; i++){
+        printf("For state %d:\n", state_names[i]);
+        for(int j = 0; j < s; j++){
+            for(int k = 0; k < n; k++){
+                printf("%d ",transitions[i][j][k]);
+            }nl;
+        }
+        for(int j = 0; j < n; j++)
+            printf("%d ",closure[i][j]);
+        nl;nl;
+    }
 
     int n_dfa_states = 1;
 
