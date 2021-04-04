@@ -17,8 +17,8 @@ int yywrap(){
 int main(){
     extern FILE *yyin, *yyout;
 
-    yyin=fopen("input.txt","r");
-	yyout=fopen("output.txt","w");
+    yyin=fopen("input_a.txt","r");
+	yyout=fopen("output_a.txt","w");
 
 	yylex();
 }

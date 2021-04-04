@@ -1,3 +1,0 @@
-this is just a test program
-this works with text, numbers (234567) and symbols (/.<&^)
-this also works with combination of those: 3*regt2(45dq&&e+
