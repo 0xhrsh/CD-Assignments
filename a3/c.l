@@ -40,7 +40,7 @@ int n = 0 ;
 int main(){
 	extern FILE *yyin;
 
-    yyin=fopen("input_b.txt","r");
+    yyin=fopen("input_c.txt","r");
 	yylex();
 	
 	printf("\ntotal no. of token = %d\n", n);
