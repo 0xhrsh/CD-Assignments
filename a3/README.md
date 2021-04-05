@@ -41,6 +41,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Note: 
 - Input will be taken from STDIN, press enter (newline) to submit.
 - Output will be printed on STDOUT.
+- Sample input ```hellow world```
 ### Assumptions:
 - Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
 - If you enter (say) "123wqer45", it will not be counted as a word.
@@ -51,13 +52,13 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Note: 
 - Input will be taken from STDIN, press enter (newline) to submit.
 - Output will be printed on STDOUT.
+- Sample input ```hello world```
 
 ## Q: H
 ### Note: 
 - The word that has to be searched will be taken from STDIN, press enter (newline) to submit.
 - The program will check if the given word is present in file ```input_h.txt```
 - Output (Found/Not Found) will be printed on STDOUT.
-- Press ctrl d to exit.
 
 
 ## Q: I

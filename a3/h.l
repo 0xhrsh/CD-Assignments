@@ -5,14 +5,13 @@ void check(char *);
 
 
 %%
-[a-zA-Z]+ {check(yytext);printf("\nEnter word that you wish to search in file: ");}
+[a-zA-Z]+ {check(yytext);return 0;}
 . ;
 \n ;
 %%
 
 
 int main(){
-    printf("NOTE: Press ctrl d to exit\n");
     printf("Enter word that you wish to search in file input_h.txt: ");
 	yylex();
 	return 0;
