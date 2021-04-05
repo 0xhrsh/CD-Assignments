@@ -10,6 +10,11 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Input will be taken from file ```input_a.txt```
 - Output will be stored in a file ```output_a.txt```
 
+## Q: B
+### Note: 
+- Input will be taken from file ```input_b.txt```
+- Output will be stored in a file ```output_b.txt```
+
 ## Q: C
 ### Note: 
 - Input will be taken from file ```input_c.txt```
