@@ -14,7 +14,7 @@ int lc=0, sc=0, tc=0;
 int main()
 {
  	extern FILE *yyin;
-    yyin=fopen("input_e.txt","r");
+    yyin=fopen("input_d.txt","r");
 
     yylex();
 	
