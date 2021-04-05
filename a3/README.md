@@ -1,6 +1,6 @@
 # Assignent 3
 
-## Intructions to run (for all parts):
+## Intructions to run (for all parts, unless stated otherwise):
 To run part `<x>` of the assignment, just do : ```lex <x>.l && cc lex.yy.c -lfl && ./a.out```.
 
 So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
@@ -44,5 +44,13 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Assumptions:
 - Numbers will be seperated by spaces (anything failing this criteria will not be counted)
 
+## Q: M
+### Instructions to compile and run:
+```lex m.l && cc lex.yy.c -lfl -lm && ./a.out```
+### Note: 
+- Input will be taken from STDIN, press enter (newline) to submit.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Only one number is given as input.
 
 
