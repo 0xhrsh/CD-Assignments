@@ -90,6 +90,8 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Assumptions:
 - Numbers will be seperated by spaces (anything failing this criteria will not be counted)
 - Positive numbers = positive integers and positive fractions (similarly for negative numbers).
+- 0 is neither positive, not negative. 
+- ```0.0```, ```1.00``` are valid fractions.
 
 ## Q: L
 ### Note: 

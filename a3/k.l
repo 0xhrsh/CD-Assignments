@@ -6,11 +6,17 @@
 
 
 %%
-\+?[0-9]+			 postiveno++;
--[0-9]+			 negtiveno++;
+\+?[1-9][0-9]*			 postiveno++;
+-[1-9][0-9]*			 negtiveno++;
 
-\+?[0-9]*\.[0-9]+ {fractions++;postiveno++;}
--[0-9]*\.[0-9]+	 {fractions++;negtiveno;}
+\+?0\.[0]*[1-9]+[0-9]* {fractions++;postiveno++;}
+-0\.[0]*[1-9]+[0-9]*	 {fractions++;negtiveno++;}
+
+\+?[1-9]+\.[0-9]+ {fractions++;postiveno++;}
+-[1-9]+\.[0-9]+	 {fractions++;negtiveno++;}
+
+\+?0.(0)+ fractions++;
+-?0.(0)+ fractions++;
 
 \n return 0;
 . ;
