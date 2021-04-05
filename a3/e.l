@@ -16,7 +16,7 @@ int i = 0;
 int yywrap(void){}
 
 int main(){
-	printf("Enter the sentence: ")
+	printf("Enter the sentence: ");
 	yylex();
 
 	return 0;
