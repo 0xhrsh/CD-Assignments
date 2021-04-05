@@ -5,26 +5,13 @@
 
 
 %% 
-" "[a-zA-Z]+" " {
-    if (yyleng - 2 > counter) {
-    	counter = yyleng - 2;
+[a-zA-Z]*[^a-zA-Z \n]+[^ \n]* ;
+
+[a-zA-Z]+ {
+    if (yyleng > counter) {
+    	counter = yyleng;
     }
 }
-
-[a-zA-Z]+" " {
-    if (yyleng - 1 > counter) {
-    	counter = yyleng - 1;
-    }
-}
-
-
-[" "][a-zA-Z]+[".\n"] {
-    if (yyleng - 3 > counter) {
-    	counter = yyleng - 3;
-        return 0;
-    }
-}
-
 
 "\n" return 0; 
 . ;
