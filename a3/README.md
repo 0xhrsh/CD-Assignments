@@ -32,8 +32,9 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Input will be taken from STDIN, press enter (newline) to submit.
 - Output will be printed on STDOUT.
 ### Assumptions:
-- Words are be made up of alphabets and seperated by spaces (anything failing this criteria will not be counted)
+- Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
 - If you enter (say) "123wqer45", it will not be counted as a word hence won't contribute to finding the longest word.
+- aBc is a valid word. (case doesn't matter)
 
 
 ## Q: K
