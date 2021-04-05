@@ -1,1 +1,2 @@
 this is just a Sample File. we want to change the Case to Sentence Case. Lets test THIS out.
+this is a sentence.This is another sentence. this is another sentence.

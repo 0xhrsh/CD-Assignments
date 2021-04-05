@@ -24,8 +24,10 @@ int yywrap(){
 int main(){
     extern FILE *yyin, *yyout;
 
+    printf("Reading input from file input_b.txt\n");
     yyin=fopen("input_b.txt","r");
 	yyout=fopen("output_b.txt","w");
+    printf("Output is in file output_b.txt\n");
 
 	yylex();
 }

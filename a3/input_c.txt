@@ -3,6 +3,10 @@
 comment*/ int a=1,b=2,c="some \n string";
 printf("hello world %s", "string");
 
+// single line comment
+
+/* multi line
+comment*/
 
 if(a == 1){
     printf("A is 1");
