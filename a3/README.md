@@ -91,4 +91,9 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Output will be printed on STDOUT.
 ### Assumptions:
 - Only one IP address is given as input.
-- A valid IP is a form a.b.c.d where a, b, c, d are integers in the range [0-255]
+- A valid IP is a form ```a.b.c.d``` where a, b, c, d are integers in the range [0-255]
+
+## Q: S
+### Note: 
+- Input will be taken from file ```input_s.txt```
+- Output will be stored in a file ```output_s.txt```
