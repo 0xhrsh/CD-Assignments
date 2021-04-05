@@ -11,7 +11,7 @@ void checkPrime(char*);
 
 // driver code
 int main(){
-    printf("Enter the number: ");
+    printf("Enter the number (positive integer): ");
 	yylex();
 	return 0;
 }
@@ -30,6 +30,9 @@ void checkPrime(char* a){
             break;
         }
     }
+
+    if(a[0] == '1' && strlen(a)==1)
+        isPrime = 0;
   
     if (isPrime == 1)
         printf("%s is Prime!\n", a);

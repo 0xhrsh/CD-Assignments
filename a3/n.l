@@ -10,7 +10,7 @@ void checkEven(char*);
 
 // driver code
 int main(){
-    printf("Enter the number: ");
+    printf("Enter the number (integer): ");
 	yylex();
 	
 	return 0;

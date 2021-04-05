@@ -17,8 +17,11 @@ int yywrap(){
 // driver code
 int main(){
     extern FILE *yyin, *yyout;
+
+    printf("Reading from file input_s.txt\n");
     yyin=fopen("input_s.txt","r");
 	yyout=fopen("output_s.txt","w");
+    printf("Writing into file output_s.txt\n");
 
 	yylex();
 	

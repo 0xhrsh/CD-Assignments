@@ -6,19 +6,20 @@ void checkAmstrong(char*);
 
 
 %%
-[0-9]+	{checkAmstrong(yytext);return 0;}
+[0-9]+"\n"	{checkAmstrong(yytext);return 0;}
+. {printf("Incorrect format, enter integer followed by enter\n"); return 0;}
 %%
 
 // driver code
 int main(){
-    printf("Enter the number: ");
+    printf("Enter the number (press enter to submit): ");
 	yylex();
 	
 	return 0;
 }
 
 void checkAmstrong(char* a){
-    
+    a[strlen(a)-1] = '\0';
     long num = 0;
     for (int i = 0; i < strlen(a); i++)
         num = num * 10 + (a[i] - '0');
