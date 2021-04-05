@@ -5,17 +5,20 @@ int lc=0, sc=0, tc=0;
 
 
 %%
-\n lc++; //line counter
-\t tc++; //tab counter
-([ ])+ sc++; //space counter
-. ;
+\n {printf(yytext);lc++;} //line counter
+\t {printf(yytext);tc++;} //tab counter
+([ ])+ {printf(yytext);sc++;} //space counter
+. printf(yytext);
 %%
 
 int main()
 {
-	yylex();
+ 	extern FILE *yyin;
+    yyin=fopen("input_e.txt","r");
+
+    yylex();
 	
-	printf("No. of lines=%d\n", lc);
+	printf("\n\nNo. of lines=%d\n", lc);
 	printf("No. of spaces=%d\n", sc);
 	printf("No. of tabs=%d\n", tc);
 	
