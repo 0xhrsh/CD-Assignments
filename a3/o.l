@@ -9,7 +9,6 @@ void checkPrime(char*);
 [0-9]+	{checkPrime(yytext);return 0;}
 %%
 
-// driver code
 int main(){
     printf("Enter the number (positive integer): ");
 	yylex();

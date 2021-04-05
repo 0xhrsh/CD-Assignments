@@ -8,7 +8,6 @@ void checkEven(char*);
 [0-9]+	{checkEven(yytext);return 0;}
 %%
 
-// driver code
 int main(){
     printf("Enter the number (integer): ");
 	yylex();

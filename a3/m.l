@@ -10,7 +10,6 @@ void checkAmstrong(char*);
 . {printf("Incorrect format, enter integer followed by enter\n"); return 0;}
 %%
 
-// driver code
 int main(){
     printf("Enter the number (press enter to submit): ");
 	yylex();

@@ -5,7 +5,6 @@ int pno = 0, nno = 0;
 %%
 [ ] ;
 
-
 \+?[1-9][0-9]*			 {pno++; printf("Positive number: %s\n", yytext);}
 -[1-9][0-9]*			 {nno++; printf("Negative number: %s\n", yytext);}
 

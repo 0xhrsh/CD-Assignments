@@ -7,7 +7,7 @@ int lc=0, sc=0, tc=0;
 %%
 \n {printf(yytext);lc++;} //line counter
 \t {printf(yytext);tc++;} //tab counter
-([ ])+ {printf(yytext);sc++;} //space counter
+([ ]) {printf(yytext);sc++;} //space counter
 . printf(yytext);
 %%
 

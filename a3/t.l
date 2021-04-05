@@ -17,7 +17,7 @@ int yywrap(){
 	return 1;
 }
 
-// driver code
+
 int main(){
     extern FILE *yyin, *yyout;
 

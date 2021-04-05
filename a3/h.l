@@ -1,12 +1,12 @@
 %{
 #include<string.h>
-void check(char *);
+void doSearch(char *);
 %}
 
 
 %%
 [a-zA-Z]*[^a-zA-Z \n]+[^ \n]* ;
-[a-zA-Z]+ {check(yytext);return 0;}
+[a-zA-Z]+ {doSearch(yytext);return 0;}
 . ;
 \n ;
 %%
@@ -17,11 +17,10 @@ int main(){
 	yylex();
 	return 0;
 }
-void check(char *str){
+void doSearch(char *str){
 
 	FILE *fp;
 	char temp[30];
-	
 	
 	
 	fp=fopen("input_h.txt", "r");

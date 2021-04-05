@@ -9,7 +9,7 @@
 \n return 0;
 %%
 
-// driver code
+
 int main(){
     printf("Enter the IP: ");
 	yylex();

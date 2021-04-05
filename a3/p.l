@@ -8,7 +8,6 @@ void checkPhoneNumber(char*);
 [0-9]+	{checkPhoneNumber(yytext);return 0;}
 %%
 
-// driver code
 int main(){
     printf("Enter the phone number: ");
 	yylex();
