@@ -4,15 +4,15 @@
 	int fractions=0;
 %}
 
-/* Rule Section */
-DIGIT [0-9]
+
 %%
+\+?[0-9]+			 postiveno++;
+-[0-9]+			 negtiveno++;
 
-\+?{DIGIT}+			 postiveno++;
--{DIGIT}+			 negtiveno++;
+\+?[0-9]*\.[0-9]+ fractions++;
+-[0-9]*\.[0-9]+	 fractions++;
 
-\+?{DIGIT}*\.{DIGIT}+ positivefractions++;
--{DIGIT}*\.{DIGIT}+	 negativefractions++;
+\n return 0;
 . ;
 %%
 
@@ -22,7 +22,6 @@ int main()
 	yylex();
 	printf("\nNo. of positive numbers: %d", postiveno);
 	printf("\nNo. of Negative numbers: %d", negtiveno);
-	printf("\nNo. of Positive numbers in fractions: %d", positivefractions);
-	printf("\nNo. of Negative numbers in fractions: %d\n", negativefractions);
+	printf("\nNo. of numbers in fractions: %d\n", fractions);
 	return 0;
 }
