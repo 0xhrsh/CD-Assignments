@@ -1,0 +1,3 @@
+this is a file to check the occurrences of some word.
+Only words with alphabets are considered valid words.
+in this text, the word "word" is present 3 times.

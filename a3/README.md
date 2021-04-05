@@ -61,8 +61,16 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Assumptions:
 - Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
 - If you enter (say) "123wqer45", it will not be counted as a word hence won't contribute to finding the longest word.
-- aBc is a valid word. (case doesn't matter)
+- aBc is a valid word, but it is not same as abc.
 
+## Q: J
+### Note: 
+- Input will be taken from file ```input_j.txt```
+- The word to be checked is present in ```line 5``` of the file ```j.l```.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted as a word)
+- aBc is a valid word, but it is not same as abc.
 
 ## Q: K
 ### Note: 
