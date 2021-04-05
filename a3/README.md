@@ -68,7 +68,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Assumptions:
 - Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
 - If you enter (say) "123wqer45", it will not be counted as a word hence won't contribute to finding the longest word.
-- aBc is a valid word, but it is not same as abc.
+- aBc is a valid word.
 
 ## Q: J
 ### Note: 

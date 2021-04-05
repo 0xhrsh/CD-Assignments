@@ -20,6 +20,6 @@
 int main() {
     printf("Assumption: Words will be made up of alphabets and seperated by spaces.\nPress enter (newline) to get answer\n");
     yylex();
-    printf("Largest word has length: %d", counter);
+    printf("Longest word has length: %d", counter);
     printf("\n");
 }
