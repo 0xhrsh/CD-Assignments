@@ -52,5 +52,21 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Output will be printed on STDOUT.
 ### Assumptions:
 - Only one number is given as input.
+- Number will fit in "long"
 
+## Q: N
+### Note: 
+- Input will be taken from STDIN, press enter (newline) to submit.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Only one number is given as input.
 
+## Q: O
+### Instructions to compile and run:
+```lex o.l && cc lex.yy.c -lfl -lm && ./a.out```
+### Note: 
+- Input will be taken from STDIN, press enter (newline) to submit.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Only one number is given as input.
+- Number will fit in "long"
