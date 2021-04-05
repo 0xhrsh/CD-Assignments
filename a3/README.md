@@ -15,12 +15,12 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Input will be taken from file ```input_c.txt```
 - Tokens and number of tokens will be printed on STDOUT.
 
-## Q: E
+## Q: D
 ### Note: 
-- Input will be taken from file ```input_e.txt```
+- Input will be taken from file ```input_d.txt```
 - Output will be printed on STDOUT.
 ### Important:
-- If you edit input_e.txt in modern text editors such as VS code, you might get incorrect results (since they convert tabs to spaces). Please edit in nano or vim if you wish to edit this file.
+- If you edit input_d.txt in modern text editors such as VS code, you might get incorrect results (since they convert tabs to spaces). Please edit in nano or vim if you wish to edit this file.
 
 ## Q: G
 ### Note: 
