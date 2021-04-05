@@ -1,7 +1,7 @@
 # Assignent 3
 
 ## Intructions to run (for all parts):
-To run part <x> of the assignment, just do : ```lex <x>.l && cc lex.yy.c -lfl && ./a.out```.
+To run part `<x>` of the assignment, just do : ```lex <x>.l && cc lex.yy.c -lfl && ./a.out```.
 
 So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 
