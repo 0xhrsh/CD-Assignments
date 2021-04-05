@@ -84,3 +84,11 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Output will be printed on STDOUT.
 ### Assumptions:
 - Only one email is given as input.
+
+## Q: R
+### Note: 
+- Input will be taken from STDIN, press enter (newline) to submit.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Only one IP address is given as input.
+- A valid IP is a form a.b.c.d where a, b, c, d are integers in the range [0-255]
