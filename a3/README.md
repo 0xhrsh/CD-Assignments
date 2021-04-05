@@ -141,3 +141,8 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Note: 
 - Input will be taken from file ```input_s.txt```
 - Output will be stored in a file ```output_s.txt```
+
+## Q: T
+### Note: 
+- Input will be taken from file ```input_t.txt```
+- Output will be stored in a file ```output_t.txt```

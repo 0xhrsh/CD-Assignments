@@ -1,0 +1,16 @@
+// single line comment
+/* multi line
+comment*/ int a=1,b=2,c="some \n string";
+printf("hello world %s", "string");
+
+/* some
+thing */
+
+char t[] = "/*not a comment */";
+char tt[] = "// also not a comment";
+
+if(a == 1){
+    printf("A is 1");
+} else {
+    printf("A is not 1");
+}
