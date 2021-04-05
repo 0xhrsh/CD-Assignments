@@ -3,12 +3,14 @@
 #include<string.h>
 
 char word [] = "word";
+char word_dot [] = "word.";
 int count = 0;
 
 %}
 
 
 %%
+[a-zA-Z]*[^a-zA-Z \n]+[^ \n]* ;
 [a-zA-Z]+ { if(strcmp(yytext, word)==0)count++;}
 \n ;
 . ;		

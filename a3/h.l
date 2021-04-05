@@ -5,6 +5,7 @@ void check(char *);
 
 
 %%
+[a-zA-Z]*[^a-zA-Z \n]+[^ \n]* ;
 [a-zA-Z]+ {check(yytext);return 0;}
 . ;
 \n ;

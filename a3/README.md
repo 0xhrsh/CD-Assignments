@@ -34,8 +34,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Sample input ```hello world```
 ### Assumptions:
 - Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
-- If you enter (say) "123wqer45", it will not be counted as a word.
-- aBc is a valid word. (case doesn't matter)
+- aBc is a valid word, ```abc.``` , ```"abc"```, ```12ab``` etc are not
 
 ## Q: F
 ### Note: 
@@ -44,8 +43,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Sample input ```hellow world```
 ### Assumptions:
 - Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
-- If you enter (say) "123wqer45", it will not be counted as a word.
-- aBc is a valid word. (case doesn't matter)
+- aBc is a valid word, ```abc.``` , ```"abc"```, ```12ab``` etc are not
 
 
 ## Q: G
@@ -59,6 +57,10 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - The word that has to be searched will be taken from STDIN, press enter (newline) to submit.
 - The program will check if the given word is present in file ```input_h.txt```
 - Output (Found/Not Found) will be printed on STDOUT.
+### Assumptions:
+- Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
+- aBc is a valid word, ```abc.``` , ```"abc"```, ```12ab``` etc are not
+- The program will NOT count if the given word is a substring of another word present in the file.
 
 
 ## Q: I
@@ -76,7 +78,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - The word to be checked is present in ```line 5``` of the file ```j.l```.
 - Output will be printed on STDOUT.
 ### Assumptions:
-- Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted as a word)
+- The program will NOT count if the given word is a substring of another word present in the file.
 - aBc is a valid word, but it is not same as abc.
 
 ## Q: K
