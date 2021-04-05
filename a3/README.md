@@ -79,6 +79,15 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 ### Assumptions:
 - Numbers will be seperated by spaces (anything failing this criteria will not be counted)
 
+## Q: L
+### Note: 
+- Input will be taken from STDIN, press enter (newline) to submit.
+- Output will be printed on STDOUT.
+### Assumptions:
+- Numbers will be seperated by spaces (anything failing this criteria will not be counted)
+- Numbers can be integers or fractions
+- A sample input is: ```1 +2 -34 +0.9 -1 -3 -34 -3.7 +4.4 1.1```
+
 ## Q: M
 ### Instructions to compile and run:
 ```lex m.l && cc lex.yy.c -lfl -lm && ./a.out```
