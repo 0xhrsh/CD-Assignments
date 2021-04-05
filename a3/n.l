@@ -9,8 +9,8 @@ void checkEven(char*);
 %%
 
 // driver code
-int main()
-{
+int main(){
+    printf("Enter the number: ");
 	yylex();
 	
 	return 0;

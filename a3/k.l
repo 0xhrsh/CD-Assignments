@@ -17,8 +17,8 @@
 %%
 
 // driver code
-int main()
-{
+int main(){
+    printf("Enter the numbers (space seperated): \n");
 	yylex();
 	printf("\nNo. of positive numbers: %d", postiveno);
 	printf("\nNo. of Negative numbers: %d", negtiveno);
