@@ -9,8 +9,8 @@
 \+?[0-9]+			 postiveno++;
 -[0-9]+			 negtiveno++;
 
-\+?[0-9]*\.[0-9]+ fractions++;
--[0-9]*\.[0-9]+	 fractions++;
+\+?[0-9]*\.[0-9]+ {fractions++;postiveno++;}
+-[0-9]*\.[0-9]+	 {fractions++;negtiveno;}
 
 \n return 0;
 . ;

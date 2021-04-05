@@ -78,8 +78,10 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - The word to be checked is present in ```line 5``` of the file ```j.l```.
 - Output will be printed on STDOUT.
 ### Assumptions:
+- Words are be made up of alphabets only and seperated by spaces (anything failing this criteria will not be counted)
 - The program will NOT count if the given word is a substring of another word present in the file.
-- aBc is a valid word, but it is not same as abc.
+- aBc is a valid word, ```abc.``` , ```"abc"```, ```12ab``` etc are not
+- aBc is not same as abc.
 
 ## Q: K
 ### Note: 
@@ -87,6 +89,7 @@ So part a can be run as: ```lex a.l && cc lex.yy.c -lfl && ./a.out```.
 - Output will be printed on STDOUT.
 ### Assumptions:
 - Numbers will be seperated by spaces (anything failing this criteria will not be counted)
+- Positive numbers = positive integers and positive fractions (similarly for negative numbers).
 
 ## Q: L
 ### Note: 
