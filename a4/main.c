@@ -6,7 +6,6 @@
 #define MAX_SMBLS 50
 #define mem(v, k) memset(v, k, sizeof(v))
 #define PIPE -2
-#define EPSILON -3
 
 #define repp(i,n) for(int i = 0; i < n; i++)
 
@@ -24,14 +23,13 @@ void getFirst(int smbl){
 
         if(i == 0 || productions[smbl][i-1] == PIPE){
 
-            if(productions[smbl][i] < n){
-                // it is a non-terminal smbl
+            if(productions[smbl][i] < n){ // it is a non-terminal smbl
                 getFirst(productions[smbl][i]);
                 repp(j, MAX_SMBLS){
                     first[smbl][j] = first[smbl][j] || first[productions[smbl][i]][j];
                 }
                 firstFound[smbl] = true;
-            } else{
+            } else{ // It is a terminal smbl
                 first[smbl][productions[smbl][i]] = true;
                 firstFound[smbl] = true;
             }
@@ -72,8 +70,7 @@ int main(){
         char * temp;
         temp = strtok (simp," ");
 
-        while (temp != NULL){
-            
+        while (temp != NULL){            
 
             if(temp[0] == '|'){
                 // fprintf(stderr, "Pipe detected\n");
@@ -150,7 +147,7 @@ int main(){
 
 
     // Finding Follow
-    
+
 
     return 0;
 }
