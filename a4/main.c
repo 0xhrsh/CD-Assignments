@@ -23,16 +23,17 @@ void getFirst(int smbl){
         if(productions[smbl][i] == -1)break;
 
         if(i == 0 || productions[smbl][i-1] == PIPE){
-            if(productions[smbl][i] == EPSILON){
-                // do something here
-            } else if(productions[smbl][i] < n){
+
+            if(productions[smbl][i] < n){
                 // it is a non-terminal smbl
                 getFirst(productions[smbl][i]);
                 repp(j, MAX_SMBLS){
                     first[smbl][j] = first[smbl][j] || first[productions[smbl][i]][j];
                 }
+                firstFound[smbl] = true;
             } else{
                 first[smbl][productions[smbl][i]] = true;
+                firstFound[smbl] = true;
             }
         }
     }
@@ -47,7 +48,6 @@ int main(){
     mem(first, 0);
     repp(i, MAX_SMBLS){
         productions[i][0] = -1;
-        first[i][0] = -1;
     }
 
 
@@ -59,6 +59,8 @@ int main(){
         scanf("%s", smbls[i]);
         count++;
     }
+    
+    strcpy(smbls[count++], "?");
 
     printf("Enter RHS of the following productions: \n");
     repp(i, n){
@@ -84,18 +86,7 @@ int main(){
                 }
                 temp = strtok(NULL, " ");
                 continue;
-            } else if(temp[0] == '?'){
-                // fprintf(stderr, "Epsilon detected\n");
-                repp(j, 2 * MAX_SMBLS){
-                    if(productions[i][j] == -1){
-                        productions[i][j] = EPSILON;
-                        productions[i][j + 1] = -1;
-                        break;
-                    }
-                }
-                temp = strtok(NULL, " ");
-                continue;
-            }
+            } 
 
             bool doesExists = false;
             repp(j,count){
@@ -144,17 +135,22 @@ int main(){
 
     printf("All Input done!\n\n");
 
+    // Finding First 
+    
+    repp(i, n) // find first for each non terminal symbol
+        getFirst(i);
 
-
-    getFirst(0);
-
-    repp(i, n){
+    repp(i, n){ // Printing the first table
         printf("First(%s) = { ", smbls[i]);
         repp(j, MAX_SMBLS){
             if(first[i][j])printf("%s, ", smbls[j]);
         }
         printf("}\n");
     }
+
+
+    // Finding Follow
+    
 
     return 0;
 }
