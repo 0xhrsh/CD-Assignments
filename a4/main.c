@@ -8,7 +8,7 @@
 #define PIPE -2
 #define EPSILON n
 #define DOLLAR dl
-#define MAX_RULES 1000
+#define MAX_RULES 100
 
 #define repp(i,n) for(int i = 0; i < n; i++)
 
@@ -128,7 +128,7 @@ int main(){
     }
     
     strcpy(smbls[count++], "?");
-    
+
     printf("\nPlease enter the RHS like CFG.\n");
     printf("For A -> d a | B C, you should enter: \"d a | B C\" only.\n");
     printf("See in1.txt and in2.txt for input for Grammar 1 and Grammar 2\n\n");
@@ -264,8 +264,9 @@ int main(){
     // Printed the follow
 
     // Printing the predictive parsing table
-    int table[n][MAX_SMBLS];
+    int table[n][MAX_SMBLS][10];
     mem(table, 0);
+    repp(i, n)repp(j, MAX_RULES) table[i][j][0] = -1;
 
     int rules[MAX_RULES][3];
     int n_rules = 1;
@@ -304,17 +305,43 @@ int main(){
             if(!cdrg){
                 rules[n_rules][0] = i;
                 rules[n_rules][1] = start;
-                rules[n_rules][2] = j;
 
                 repp(k, MAX_SMBLS){
                     if(k!=EPSILON && flw[k]){
-                        table[i][k] = n_rules;
+                        int add = 0;
+                        while(table[i][k][add]!=-1){
+                            if(table[i][k][add] == n_rules){
+                                add = -1;
+                                break;
+                            }
+                            add++;
+                        }
+                        if(add != -1){
+                            table[i][k][add] = n_rules;
+                            table[i][k][add+1] = -1;
+                        }
                     }
                 }
 
                 if(flw[EPSILON]){
-                   repp(k, MAX_SMBLS)
-                    table[i][k] = follow[i][k]==true?n_rules:table[i][k];
+                   repp(k, MAX_SMBLS){
+                       if(follow[i][k]){
+                            int add = 0;
+                            while(table[i][k][add]!=-1){
+                                if(table[i][k][add] == n_rules){
+                                    add = -1;
+                                    break;
+                                }
+                                add++;
+                            }
+                            if(add!=-1){
+                                table[i][k][add] = n_rules;
+                                table[i][k][add+1] = -1;
+                            }
+                            
+                            
+                       }
+                   }
                 }
                 n_rules++;
             }
@@ -329,8 +356,19 @@ int main(){
     repp(i,n){
         printf("\n%s \t", smbls[i]);
         for(int j = n+1; j < count; j++){
-            if(table[i][j]== 0) printf("err\t");
-            else printf("%d \t", table[i][j]);
+            if(table[i][j][0]== -1) printf("err\t");
+            else{
+                int add = 0;
+                while(table[i][j][add]!=-1){
+                    if(table[i][j][add+1] == -1)
+                        printf("%d", table[i][j][add]);
+                    else
+                        printf("%d,", table[i][j][add]);
+                    add++;
+                }
+                printf("\t");
+            }
+            
             
         }
     }

@@ -21,10 +21,10 @@ Follow(C) =  b, g, h, $,
 Parsing table (with rule nums) *find the rule num->rule matching at the bottom*
 
 	b	a	d	g	h	$	
-S 	2 	3 	1 	3 	2 	3 	
-A 	err	err	4 	5 	5 	5 	
-B 	err	7 	err	7 	7 	7 	
-C 	9 	err	err	9 	9 	9 	
+S 	2	3	1	1,3	1,2	1,2,3	
+A 	err	err	4	5	5	5	
+B 	err	7	err	6,7	7	7	
+C 	9	err	err	9	8,9	9	
 
 Rules:
 Rule 1:	S -> A C B 

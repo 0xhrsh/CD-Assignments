@@ -25,12 +25,12 @@ Follow(stmts) =  },
 Parsing table (with rule nums) *find the rule num->rule matching at the bottom*
 
 	if	then	while	do	;	=>	id	isZero?	not	++	−−	const	{	}	$	
-prog 	1 	err	1 	err	err	err	1 	1 	1 	1 	1 	1 	err	err	err	
-stmt 	2 	err	3 	err	err	err	4 	4 	4 	4 	4 	4 	err	err	err	
-expr 	err	err	err	err	err	err	5 	6 	7 	8 	9 	5 	err	err	err	
-term 	err	err	err	err	err	err	10 	err	err	err	err	11 	err	err	err	
-block 	12 	err	12 	err	err	err	12 	12 	12 	12 	12 	12 	13 	err	err	
-stmts 	14 	err	14 	err	err	err	14 	14 	14 	14 	14 	14 	err	15 	err	
+prog 	1	err	1	err	err	err	1	1	1	1	1	1	err	err	err	
+stmt 	2	err	3	err	err	err	4	4	4	4	4	4	err	err	err	
+expr 	err	err	err	err	err	err	5	6	7	8	9	5	err	err	err	
+term 	err	err	err	err	err	err	10	err	err	err	err	11	err	err	err	
+block 	12	err	12	err	err	err	12	12	12	12	12	12	13	err	err	
+stmts 	14	err	14	err	err	err	14	14	14	14	14	14	err	15	err	
 
 Rules:
 Rule 1:	prog -> stmt 
