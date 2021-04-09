@@ -47,15 +47,24 @@ void getFollow(int smbl){
             if(productions[i][j] == -1){
                 break;
             } else if(productions[i][j] == smbl){
-                if(productions[i][j+1] == -1){
+                if(productions[i][j+1] == -1 || productions[i][j+1] == PIPE){
+                    fprintf(stderr, "Follow End -> %d smbl -> %d\n", i, smbl);
                     getFollow(i);
                     repp(k, MAX_SMBLS){
                         follow[smbl][k] = follow[smbl][k] || follow[i][k];
                     }
                 } else if(productions[i][j+1] < n) {
+                    fprintf(stderr, "Follow next non-terminal -> %d smbl -> %d\n", i, smbl);
                     repp(k, MAX_SMBLS){
-                        if(k!=n)
+                        if(k != EPSILON)
                             follow[smbl][k] = follow[smbl][k] || first[productions[i][j+1]][k];
+                    }
+
+                    if(first[productions[i][j+1]][EPSILON]){
+                        getFollow(i);
+                        repp(k, MAX_SMBLS){
+                            follow[smbl][k] = follow[smbl][k] || follow[i][k];
+                        }
                     }
                 } else if(productions[i][j+1] != EPSILON){
                     follow[smbl][productions[i][j+1]] = true;
@@ -64,17 +73,6 @@ void getFollow(int smbl){
         }
     }
     return;
-
-    // repp(i, MAX_SMBLS){
-    //     if(productions[smbl][i] == -1) break;
-    //     if(productions[smbl][i] < n){
-    //         if(productions[smbl][i+1] != -1){
-    //             if(productions[smbl][i] < n){
-                    
-    //             }
-    //         }
-    //     }
-    // }
 }
 
 
@@ -96,7 +94,7 @@ int main(){
     scanf("%d", &n);
     
     repp(i,n){
-        printf("Enter %dth terminal symbol (string): ", i+1);
+        printf("Enter %dth non-terminal symbol (string): ", i+1);
         scanf("%s", smbls[i]);
         count++;
     }
@@ -199,7 +197,7 @@ int main(){
         repp(j, MAX_SMBLS){
             if(follow[i][j])printf("%s, ", smbls[j]);
         }
-        printf("}\n");
+        printf("$ }\n");
     }
 
 
