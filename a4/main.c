@@ -6,17 +6,19 @@
 #define MAX_SMBLS 50
 #define mem(v, k) memset(v, k, sizeof(v))
 #define PIPE -2
+#define EPSILON n
 
 #define repp(i,n) for(int i = 0; i < n; i++)
 
 char smbls[MAX_SMBLS + 1][20];
 int productions[MAX_SMBLS + 1][(MAX_SMBLS * 2) + 1];
 int count, n;
-bool firstFound[MAX_SMBLS + 1];
-bool first[MAX_SMBLS + 1][MAX_SMBLS + 1];
+bool firstFound[MAX_SMBLS + 1], followFound[MAX_SMBLS + 1];
+bool first[MAX_SMBLS + 1][MAX_SMBLS + 1], follow[MAX_SMBLS + 1][MAX_SMBLS + 1];
 
 void getFirst(int smbl){
     if(firstFound[smbl])return;
+    firstFound[smbl] = true;
 
     repp(i, 2 * MAX_SMBLS){
         if(productions[smbl][i] == -1)break;
@@ -28,14 +30,51 @@ void getFirst(int smbl){
                 repp(j, MAX_SMBLS){
                     first[smbl][j] = first[smbl][j] || first[productions[smbl][i]][j];
                 }
-                firstFound[smbl] = true;
             } else{ // It is a terminal smbl
                 first[smbl][productions[smbl][i]] = true;
-                firstFound[smbl] = true;
             }
         }
     }
     return;
+}
+
+void getFollow(int smbl){
+    if(followFound[smbl]) return;
+    followFound[smbl] = true;
+
+    repp(i, n){
+        repp(j, MAX_SMBLS){
+            if(productions[i][j] == -1){
+                break;
+            } else if(productions[i][j] == smbl){
+                if(productions[i][j+1] == -1){
+                    getFollow(i);
+                    repp(k, MAX_SMBLS){
+                        follow[smbl][k] = follow[smbl][k] || follow[i][k];
+                    }
+                } else if(productions[i][j+1] < n) {
+                    repp(k, MAX_SMBLS){
+                        if(k!=n)
+                            follow[smbl][k] = follow[smbl][k] || first[productions[i][j+1]][k];
+                    }
+                } else if(productions[i][j+1] != EPSILON){
+                    follow[smbl][productions[i][j+1]] = true;
+                }
+            }
+        }
+    }
+    return;
+
+    // repp(i, MAX_SMBLS){
+    //     if(productions[smbl][i] == -1) break;
+    //     if(productions[smbl][i] < n){
+    //         if(productions[smbl][i+1] != -1){
+    //             if(productions[smbl][i] < n){
+                    
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 
@@ -44,6 +83,10 @@ int main(){
     count = 0;
     mem(firstFound, 0);
     mem(first, 0);
+
+    mem(followFound, 0);
+    mem(follow, 0);
+    
     repp(i, MAX_SMBLS){
         productions[i][0] = -1;
     }
@@ -146,7 +189,20 @@ int main(){
     }
 
 
-    // Finding Follow
+    printf("\n\n");
+
+    repp(i, n) // Finding Follow
+        getFollow(i);
+
+    repp(i, n){ // Printing the first table
+        printf("Follow(%s) = { ", smbls[i]);
+        repp(j, MAX_SMBLS){
+            if(follow[i][j])printf("%s, ", smbls[j]);
+        }
+        printf("}\n");
+    }
+
+
 
 
     return 0;
