@@ -1,0 +1,45 @@
+Enter the number of productions: Enter 1th non-terminal symbol (string): Enter 2th non-terminal symbol (string): Enter 3th non-terminal symbol (string): Enter 4th non-terminal symbol (string): Enter 5th non-terminal symbol (string): Enter 6th non-terminal symbol (string): Enter RHS of the following productions: 
+prog -> stmt -> expr -> term -> block -> stmts -> All Input done!
+
+First(prog) =  if, while, id, isZero?, not, ++, −−, const, 
+First(stmt) =  if, while, id, isZero?, not, ++, −−, const, 
+First(expr) =  id, isZero?, not, ++, −−, const, 
+First(term) =  id, const, 
+First(block) =  if, while, id, isZero?, not, ++, −−, const, {, 
+First(stmts) =  ?, if, while, id, isZero?, not, ++, −−, const, 
+
+
+Follow(prog) =  $, 
+Follow(stmt) =  if, while, id, isZero?, not, ++, −−, const, }, $, 
+Follow(expr) =  then, do, ;, 
+Follow(term) =  then, do, ;, =>, 
+Follow(block) =  if, while, id, isZero?, not, ++, −−, const, }, $, 
+Follow(stmts) =  }, 
+
+
+Parsing table (with rule nums) *find the rule num->rule matching at the bottom*
+
+	if	then	while	do	;	=>	id	isZero?	not	++	−−	const	{	}	$	
+prog 	1 	err	1 	err	err	err	1 	1 	1 	1 	1 	1 	err	err	err	
+stmt 	2 	err	3 	err	err	err	4 	4 	4 	4 	4 	4 	err	err	err	
+expr 	err	err	err	err	err	err	5 	6 	7 	8 	9 	5 	err	err	err	
+term 	err	err	err	err	err	err	10 	err	err	err	err	11 	err	err	err	
+block 	12 	err	12 	err	err	err	12 	12 	12 	12 	12 	12 	13 	err	err	
+stmts 	14 	err	14 	err	err	err	14 	14 	14 	14 	14 	14 	err	15 	err	
+
+Rules:
+Rule 1:	prog -> stmt 
+Rule 2:	stmt -> if expr then block 
+Rule 3:	stmt -> while expr do block 
+Rule 4:	stmt -> expr ; 
+Rule 5:	expr -> term => id 
+Rule 6:	expr -> isZero? term 
+Rule 7:	expr -> not expr 
+Rule 8:	expr -> ++ id 
+Rule 9:	expr -> −− id 
+Rule 10:	term -> id 
+Rule 11:	term -> const 
+Rule 12:	block -> stmt 
+Rule 13:	block -> { stmts } 
+Rule 14:	stmts -> stmt stmts 
+Rule 15:	stmts -> ? 

@@ -8,6 +8,7 @@
 #define PIPE -2
 #define EPSILON n
 #define DOLLAR dl
+#define MAX_RULES 1000
 
 #define repp(i,n) for(int i = 0; i < n; i++)
 
@@ -117,7 +118,7 @@ int main(){
     }
 
 
-    printf("Enter the number of productions: ");
+    printf("Enter the number of non-terminal symbols: ");
     scanf("%d", &n);
     
     repp(i,n){
@@ -127,8 +128,12 @@ int main(){
     }
     
     strcpy(smbls[count++], "?");
+    
+    printf("\nPlease enter the RHS like CFG.\n");
+    printf("For A -> d a | B C, you should enter: \"d a | B C\" only.\n");
+    printf("See in1.txt and in2.txt for input for Grammar 1 and Grammar 2\n\n");
 
-    printf("Enter RHS of the following productions: \n");
+    printf("Enter RHS of the CGF for the following NT Symbols (everything should be space separated): \n");
     repp(i, n){
         printf("%s -> ", smbls[i]);
         char simp[250];
@@ -210,11 +215,11 @@ int main(){
         getFirst(i);
 
     repp(i, n){ // Printing the first table
-        printf("First(%s) = { ", smbls[i]);
+        printf("First(%s) =  ", smbls[i]);
         repp(j, MAX_SMBLS){
             if(first[i][j])printf("%s, ", smbls[j]);
         }
-        printf("}\n");
+        printf("\n");
     }
 
 
@@ -249,13 +254,101 @@ int main(){
     }
 
     repp(i, n){ // Printing the first table
-        printf("Follow(%s) = { ", smbls[i]);
+        printf("Follow(%s) =  ", smbls[i]);
         repp(j, MAX_SMBLS){
             if(follow[i][j])printf("%s, ", smbls[j]);
         }
-        printf("}\n");
+        printf("\n");
     }
 
+    // Printed the follow
+
+    // Printing the predictive parsing table
+    int table[n][MAX_SMBLS];
+    mem(table, 0);
+
+    int rules[MAX_RULES][3];
+    int n_rules = 1;
+
+    repp(i, n){
+        
+        bool flw[MAX_SMBLS];
+        mem(flw, 0);
+        int start = 0;
+        int cdrg = true;;
+        repp(j, MAX_SMBLS){
+            int Fsmbl = productions[i][j];
+            if(Fsmbl == -1){
+                break;
+            } else if(Fsmbl == PIPE){
+                cdrg = true;
+                mem(flw, 0);
+                start = j+1;
+            }else if (!cdrg){
+                continue;
+            }else if(Fsmbl >= n) {
+                flw[Fsmbl] = true;
+                cdrg = false;
+            } else {
+                repp(k, MAX_RULES) if(first[Fsmbl][k]) flw[k] = true;
+
+                if(first[Fsmbl][EPSILON]){
+                    if (productions[i][j+1] == PIPE || productions[i][j+1] == -1){
+                        flw[EPSILON] = true;
+                        cdrg = false;
+                    }
+                } else {
+                    cdrg = false;
+                }
+            }
+            if(!cdrg){
+                rules[n_rules][0] = i;
+                rules[n_rules][1] = start;
+                rules[n_rules][2] = j;
+
+                repp(k, MAX_SMBLS){
+                    if(k!=EPSILON && flw[k]){
+                        table[i][k] = n_rules;
+                    }
+                }
+
+                if(flw[EPSILON]){
+                   repp(k, MAX_SMBLS)
+                    table[i][k] = follow[i][k]==true?n_rules:table[i][k];
+                }
+                n_rules++;
+            }
+        }
+    }
+    printf("\n\nParsing table (with rule nums) *find the rule num->rule matching at the bottom*\n");
+    printf("\n\t");
+    for(int i = n+1; i < count; i++){
+        printf("%s\t", smbls[i]);
+    }
+
+    repp(i,n){
+        printf("\n%s \t", smbls[i]);
+        for(int j = n+1; j < count; j++){
+            if(table[i][j]== 0) printf("err\t");
+            else printf("%d \t", table[i][j]);
+            
+        }
+    }
+
+    printf("\n\nRules:\n");
+    repp(i, n_rules){
+        if(i==0)continue;
+        printf("Rule %d:\t%s -> ", i, smbls[rules[i][0]]);
+        int j = rules[i][1];
+        while(true){
+            if(productions[rules[i][0]][j] == PIPE || productions[rules[i][0]][j] == -1) 
+                break;
+            printf("%s ", smbls[productions[rules[i][0]][j]]);
+            j++;
+        }
+        
+        printf("\n");
+    }
 
 
 
