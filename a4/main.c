@@ -60,31 +60,40 @@ void getFollow(int smbl){
 
     repp(i, n){
         repp(j, MAX_SMBLS){
-            if(productions[i][j] == -1){
-                break;
-            } else if(productions[i][j] == smbl){
-                if(productions[i][j+1] == -1 || productions[i][j+1] == PIPE){
-                    // fprintf(stderr, "Follow End -> %d smbl -> %d\n", i, smbl);
-                    getFollow(i);
-                    repp(k, MAX_SMBLS){
-                        follow[smbl][k] = follow[smbl][k] || follow[i][k];
-                    }
-                } else if(productions[i][j+1] < n) {
-                    // fprintf(stderr, "Follow next non-terminal -> %d smbl -> %d\n", i, smbl);
-                    repp(k, MAX_SMBLS){
-                        if(k != EPSILON)
-                            follow[smbl][k] = follow[smbl][k] || first[productions[i][j+1]][k];
-                    }
-
-                    if(first[productions[i][j+1]][EPSILON]){
+            if(productions[i][j] == -1) break;
+                
+            if(productions[i][j] == smbl){
+                int Fsmbl = productions[i][j+1];
+                while(j < MAX_SMBLS){
+                    if (Fsmbl == -1 || Fsmbl == PIPE){
                         getFollow(i);
                         repp(k, MAX_SMBLS){
                             follow[smbl][k] = follow[smbl][k] || follow[i][k];
                         }
+                        break;
+                    } else if(Fsmbl < n){ // Non terminal
+                        repp(k, MAX_SMBLS){
+                            if(k != EPSILON)
+                                follow[smbl][k] = follow[smbl][k] || first[Fsmbl][k];
+                        }
+                        if(first[Fsmbl][EPSILON]){
+                            Fsmbl = productions[i][++j+1];
+                            if(Fsmbl == -1 || Fsmbl == PIPE){
+                                getFollow(i);
+                                repp(k, MAX_SMBLS){
+                                    follow[smbl][k] = follow[smbl][k] || follow[i][k];
+                                }
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    } else { // Terminal
+                        follow[smbl][Fsmbl] = true;
+                        break;
                     }
-                } else if(productions[i][j+1] != EPSILON){
-                    follow[smbl][productions[i][j+1]] = true;
-                }
+                }  
+                
             }
         }
     }
