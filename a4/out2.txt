@@ -1,4 +1,9 @@
-Enter the number of productions: Enter 1th non-terminal symbol (string): Enter 2th non-terminal symbol (string): Enter 3th non-terminal symbol (string): Enter 4th non-terminal symbol (string): Enter 5th non-terminal symbol (string): Enter 6th non-terminal symbol (string): Enter RHS of the following productions: 
+Enter the number of non-terminal symbols: Enter 1th non-terminal symbol (string): Enter 2th non-terminal symbol (string): Enter 3th non-terminal symbol (string): Enter 4th non-terminal symbol (string): Enter 5th non-terminal symbol (string): Enter 6th non-terminal symbol (string): 
+Please enter the RHS like CFG.
+For A -> d a | B C, you should enter: "d a | B C" only.
+See in1.txt and in2.txt for input for Grammar 1 and Grammar 2
+
+Enter RHS of the CGF for the following NT Symbols (everything should be space separated): 
 prog -> stmt -> expr -> term -> block -> stmts -> All Input done!
 
 First(prog) =  if, while, id, isZero?, not, ++, −−, const, 

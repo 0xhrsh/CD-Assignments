@@ -1,4 +1,9 @@
-Enter the number of productions: Enter 1th non-terminal symbol (string): Enter 2th non-terminal symbol (string): Enter 3th non-terminal symbol (string): Enter 4th non-terminal symbol (string): Enter RHS of the following productions: 
+Enter the number of non-terminal symbols: Enter 1th non-terminal symbol (string): Enter 2th non-terminal symbol (string): Enter 3th non-terminal symbol (string): Enter 4th non-terminal symbol (string): 
+Please enter the RHS like CFG.
+For A -> d a | B C, you should enter: "d a | B C" only.
+See in1.txt and in2.txt for input for Grammar 1 and Grammar 2
+
+Enter RHS of the CGF for the following NT Symbols (everything should be space separated): 
 S -> A -> B -> C -> All Input done!
 
 First(S) =  ?, b, a, d, g, h, 
@@ -11,6 +16,9 @@ Follow(S) =  $,
 Follow(A) =  g, h, $, 
 Follow(B) =  a, g, h, $, 
 Follow(C) =  b, g, h, $, 
+
+
+Parsing table (with rule nums) *find the rule num->rule matching at the bottom*
 
 	b	a	d	g	h	$	
 S 	2 	3 	1 	3 	2 	3 	
