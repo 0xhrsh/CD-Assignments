@@ -221,39 +221,33 @@ int main(){
     printf("\n\n");
 
 
-    bool isDiff = false;
-
-    while(!isDiff){
+    bool isDiff = true;
+    while(isDiff){
         bool old_follow[n][MAX_SMBLS];
         repp(i,n){
             repp(j, MAX_SMBLS){
                 old_follow[i][j] = follow[i][j];
-                // follow[i][j] = false;
             }
         }
+        isDiff = false;
 
+        mem(followFound, 0);
         repp(i, n) // Finding Follow
             getFollow(i);
-
         
         repp(i,n){
             repp(j, MAX_SMBLS){
                 if(old_follow[i][j] != follow[i][j]){
                     isDiff = true;
                     break;
+                } else {
+                    isDiff = isDiff || isDiff;
                 }
             }
-            if(isDiff)break;
+            
         }
     }
-    
-    mem(followFound, 0);
-    repp(i, n) // Finding Follow
-        getFollow(i);
 
-    
-    
-    
     repp(i, n){ // Printing the first table
         printf("Follow(%s) = { ", smbls[i]);
         repp(j, MAX_SMBLS){
