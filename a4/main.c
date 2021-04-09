@@ -7,12 +7,13 @@
 #define mem(v, k) memset(v, k, sizeof(v))
 #define PIPE -2
 #define EPSILON n
+#define DOLLAR dl
 
 #define repp(i,n) for(int i = 0; i < n; i++)
 
 char smbls[MAX_SMBLS + 1][20];
 int productions[MAX_SMBLS + 1][(MAX_SMBLS * 2) + 1];
-int count, n;
+int count, n, dl;
 bool firstFound[MAX_SMBLS + 1], followFound[MAX_SMBLS + 1];
 bool first[MAX_SMBLS + 1][MAX_SMBLS + 1], follow[MAX_SMBLS + 1][MAX_SMBLS + 1];
 
@@ -55,9 +56,6 @@ void getFirst(int smbl){
 }
 
 void getFollow(int smbl){
-    if(smbl == 4){
-        fprintf(stderr, "We are here\n");
-    }
     if(followFound[smbl]) return;
     followFound[smbl] = true;
 
@@ -189,6 +187,10 @@ int main(){
         }
     }
 
+    strcpy(smbls[count], "$");
+    dl = count++;
+    follow[0][dl] = true;
+
     // // Uncomment to check if input is read correctly
     // repp(i, n){
     //     repp(j, MAX_SMBLS){
@@ -220,12 +222,13 @@ int main(){
 
 
     bool isDiff = false;
+
     while(!isDiff){
         bool old_follow[n][MAX_SMBLS];
         repp(i,n){
             repp(j, MAX_SMBLS){
                 old_follow[i][j] = follow[i][j];
-                follow[i][j] = false;
+                // follow[i][j] = false;
             }
         }
 
@@ -256,7 +259,7 @@ int main(){
         repp(j, MAX_SMBLS){
             if(follow[i][j])printf("%s, ", smbls[j]);
         }
-        printf("$ }\n");
+        printf("}\n");
     }
 
 
