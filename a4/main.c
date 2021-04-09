@@ -55,6 +55,9 @@ void getFirst(int smbl){
 }
 
 void getFollow(int smbl){
+    if(smbl == 4){
+        fprintf(stderr, "We are here\n");
+    }
     if(followFound[smbl]) return;
     followFound[smbl] = true;
 
@@ -97,6 +100,7 @@ void getFollow(int smbl){
             }
         }
     }
+    
     return;
 }
 
@@ -214,9 +218,39 @@ int main(){
 
     printf("\n\n");
 
+
+    bool isDiff = false;
+    while(!isDiff){
+        bool old_follow[n][MAX_SMBLS];
+        repp(i,n){
+            repp(j, MAX_SMBLS){
+                old_follow[i][j] = follow[i][j];
+                follow[i][j] = false;
+            }
+        }
+
+        repp(i, n) // Finding Follow
+            getFollow(i);
+
+        
+        repp(i,n){
+            repp(j, MAX_SMBLS){
+                if(old_follow[i][j] != follow[i][j]){
+                    isDiff = true;
+                    break;
+                }
+            }
+            if(isDiff)break;
+        }
+    }
+    
+    mem(followFound, 0);
     repp(i, n) // Finding Follow
         getFollow(i);
 
+    
+    
+    
     repp(i, n){ // Printing the first table
         printf("Follow(%s) = { ", smbls[i]);
         repp(j, MAX_SMBLS){
