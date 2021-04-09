@@ -1,0 +1,13 @@
+6
+prog
+stmt
+expr
+term
+block
+stmts
+stmt
+if expr then block | while expr do block | expr ;
+term => id | isZero? term | not expr | ++ id | −− id
+id | const
+stmt | { stmts }
+stmt stmts | ?

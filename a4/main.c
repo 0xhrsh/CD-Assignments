@@ -24,11 +24,27 @@ void getFirst(int smbl){
         if(productions[smbl][i] == -1)break;
 
         if(i == 0 || productions[smbl][i-1] == PIPE){
-
             if(productions[smbl][i] < n){ // it is a non-terminal smbl
-                getFirst(productions[smbl][i]);
-                repp(j, MAX_SMBLS){
-                    first[smbl][j] = first[smbl][j] || first[productions[smbl][i]][j];
+                int Fsmbl = productions[smbl][i];
+                while(Fsmbl != PIPE){
+                    getFirst(Fsmbl);
+                    if(Fsmbl < n){
+                        repp(j, MAX_SMBLS){
+                            if(j != EPSILON)
+                            first[smbl][j] = first[smbl][j] || first[Fsmbl][j];
+                        }
+                    } else {
+                        first[smbl][Fsmbl] = true;
+                    }
+                    if (first[Fsmbl][EPSILON]){
+                        if(productions[smbl][i + 1] == PIPE || productions[smbl][i + 1] == -1)
+                            first[smbl][EPSILON] = true;
+                        Fsmbl = productions[smbl][++i];
+                        if(Fsmbl == -1) return;
+
+                    } else {
+                        break;
+                    }
                 }
             } else{ // It is a terminal smbl
                 first[smbl][productions[smbl][i]] = true;
@@ -48,13 +64,13 @@ void getFollow(int smbl){
                 break;
             } else if(productions[i][j] == smbl){
                 if(productions[i][j+1] == -1 || productions[i][j+1] == PIPE){
-                    fprintf(stderr, "Follow End -> %d smbl -> %d\n", i, smbl);
+                    // fprintf(stderr, "Follow End -> %d smbl -> %d\n", i, smbl);
                     getFollow(i);
                     repp(k, MAX_SMBLS){
                         follow[smbl][k] = follow[smbl][k] || follow[i][k];
                     }
                 } else if(productions[i][j+1] < n) {
-                    fprintf(stderr, "Follow next non-terminal -> %d smbl -> %d\n", i, smbl);
+                    // fprintf(stderr, "Follow next non-terminal -> %d smbl -> %d\n", i, smbl);
                     repp(k, MAX_SMBLS){
                         if(k != EPSILON)
                             follow[smbl][k] = follow[smbl][k] || first[productions[i][j+1]][k];
@@ -136,7 +152,7 @@ int main(){
                             break;
                         }
                     }
-                    
+
                     doesExists = true;
                     break;
                 }
