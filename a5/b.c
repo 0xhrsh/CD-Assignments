@@ -1,69 +1,97 @@
-#include<stdio.h>
-#include<ctype.h>
-#include<string.h>
- 
-void Tprime();
-void Eprime();
-void E();
-void check(); 
-void T();
- 
- 
-char expression[10];
-int count, flag;
- 
-int main(){
-    count = 0;
-    flag = 0;
-    printf("\nEnter an Algebraic Expression:\t");
-    scanf("%s", expression);
-    E();
-    if((strlen(expression) == count) && (flag == 0)){
-        printf("\nThe Expression %s is Valid\n", expression);
+# include<stdio.h>
+// # include<conio.h>
+# include<string.h>
+
+char input[100];
+
+int i, l;
+
+int T();
+int E();
+int EP();
+int TP();
+int F();
+
+void main(){
+
+    printf("\nRecursive descent parsing for the following grammar\n");
+    printf("\nE->TE'\nE'->+TE'/@\nT->FT'\nT'->*FT'/@\nF->(E)/id\n");
+    printf("\nEnter the string to be checked:");
+    scanf("%s", input);
+    // gets(input);
+    printf("%s\n", input);
+
+    if(E()){
+        if(input[i+1] == '\0')
+            printf("\nString is accepted\n");
+        else
+            printf("\nString is not accepted\n");
+    }else printf("\nString not accepted\n");
+
+    // getch();
+}
+
+int E(){
+    if(T()){
+        if(EP()) return(1);
+        return(0);
     }
-    else{
-        printf("\nThe Expression %s is Invalid\n", expression);
-    }
+    return(0);
 }
-                    
-void E(){
-    T();
-    Eprime();
-}
- 
-void T(){
-    check();
-    Tprime();
-}
- 
-void Tprime(){
-    if(expression[count] == '*'){
-        count++;
-        check();
-        Tprime();
-    }
-}
- 
-void check(){
-    if(isalnum(expression[count])){
-        count++;
-    }else if(expression[count] == '('){
-        count++;
-        E();
-        if(expression[count] == ')'){
-            count++;
-        }else{
-            flag = 1; 
+
+int EP(){
+    if(input[i] == '+'){
+        i++;
+
+        if(T()){
+            if(EP())
+                return(1);
+            return(0);
         }
-    }else{
-        flag = 1;
+        return(0);
     }
+    return(1);
 }
- 
-void Eprime(){
-    if(expression[count] == '+'){
-        count++;
-        T();
-        Eprime();
+
+int T(){
+    if(F()){
+        if(TP())
+            return(1);
+        return(0);
     }
+    return(0);
+}
+
+int TP(){
+    if(input[i] == '*'){
+        i++;
+        if(F()){
+            if(TP())
+                return(1);
+            return(0);
+        }
+        return(0);
+    }
+    
+    return(1);
+}
+
+int F(){
+    if(input[i] == '('){
+        i++;
+
+        if(E()){
+            if(input[i] == ')'){
+                i++;
+                return(1);
+            }
+            return(0);
+        }
+        return(0);
+    } else if(input[i]=='i' && input[i+1] =='d'){
+        i+=2;
+        return(1);
+    }
+
+    return(0);
 }
