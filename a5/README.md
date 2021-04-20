@@ -7,3 +7,5 @@ Input for grammar 1 and grammar 2 can be found: ```grammar1.txt``` and ```gramma
 
 ## Part B
 Compile and run the program using: ```gcc b.c && ./a.out```
+
+Input for this part is: ```(id+id)*id``` and ```)id+id*id```

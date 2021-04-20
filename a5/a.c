@@ -19,14 +19,16 @@ void main(){
         scanf("%1s->%s",l,r);
 
         while(sscanf(r+consumed,"%[^|]s",prod_part) == 1 && consumed <= strlen(r)){
+            consumed += strlen(prod_part)+1;
             if(prod_part[0] == l[0]){
                 flag = 1;
+                break;
             }
-            consumed += strlen(prod_part)+1;
         }
 
         consumed = 0;
-        while(sscanf(r+consumed,"%[^|]s",prod_part) == 1 && consumed <= strlen(r)){
+        while(consumed <= strlen(r) && sscanf(r+consumed,"%[^|]s",prod_part) == 1){
+            consumed += strlen(prod_part)+1;
             if(prod_part[0] == l[0]){
                 sprintf(productions[i++],"%s'->%s%s'\0",l,prod_part+1,l);
             }
@@ -36,7 +38,6 @@ void main(){
             else{
                 sprintf(productions[i++],"%s->%s\0",l,prod_part);
             }
-            consumed += strlen(prod_part)+1;
         }
 
         if(flag == 1)  {
