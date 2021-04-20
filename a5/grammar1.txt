@@ -1,4 +1,4 @@
 3
 E->E+T|T
 T->T*F|F
-F->(E)|id
+F->(E)|i
