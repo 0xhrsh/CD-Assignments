@@ -17,6 +17,7 @@ void main(){
     printf("\nEnter the string to be checked: ");
     scanf("%s", input);
     // printf("String: %s\n", input);
+    printf("\n");
 
     if(E()){
         if(input[i+1] == '\0'){
@@ -28,6 +29,7 @@ void main(){
 }
 
 int E(){
+    printf("\tE -> TE'\n");
     if(T()){
         if(EP()) return(1);
         return(0);
@@ -38,6 +40,7 @@ int E(){
 int EP(){
     if(input[i] == '+'){
         i++;
+        printf("\tE' -> +TE'\n");
 
         if(T()){
             if(EP())
@@ -46,6 +49,7 @@ int EP(){
         }
         return(0);
     }
+    printf("\tE' -> ɛ\n");
     return(1);
 }
 
@@ -54,7 +58,7 @@ int EP(){
 int F(){
     if(input[i] == '('){
         i++;
-
+        printf("\tF -> (E)\n");
         if(E()){
             if(input[i] == ')'){
                 i++;
@@ -64,6 +68,7 @@ int F(){
         }
         return(0);
     } else if(input[i]=='i' && input[i+1] =='d'){ // checking for terminal symbols
+        printf("\tF -> id\n");
         i+=2;
         return(1);
     }
@@ -74,6 +79,7 @@ int F(){
 int TP(){
     if(input[i] == '*'){
         i++;
+        printf("\tT' -> *FT'\n");
         if(F()){
             if(TP())
                 return(1);
@@ -81,11 +87,12 @@ int TP(){
         }
         return(0);
     }
-    
+    printf("\tT' -> ɛ\n");
     return(1);
 }
 
 int T(){
+    printf("\tT -> FT'\n");
     if(F()){
         if(TP())
             return(1);
