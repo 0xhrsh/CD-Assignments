@@ -219,52 +219,11 @@ void printt(char *t,int *p,char inp[],int i){
 }
 
 void rep(char t[],int r){
-    char c;
-
-    c=t[r];
-
-    // if(c<'h')printf("%d", c-'a');
-    // else if
-
-    switch(c){
-
-        case 'a': printf("0");
-        break;
-
-        case 'b': printf("1");
-        break;
-
-        case 'c': printf("2");
-        break;
-
-        case 'd': printf("3");
-        break;
-
-        case 'e': printf("4");
-        break;
-
-        case 'f': printf("5");
-        break;
-
-        case 'g': printf("6");
-        break;
-
-        case 'h': printf("7");
-        break;
-
-        case 'm': printf("8");
-        break;
-
-        case 'j': printf("9");
-        break;
-
-        case 'k': printf("10");
-        break;
-
-        case 'l': printf("11");
-        break;
-
-        default :printf("%c",t[r]);
-        break;
+    repp(i, 12){
+        if(states[i] == t[r]){
+            printf("%d", i);
+            return;
+        }
     }
+    printf("%c",t[r]);
 }
