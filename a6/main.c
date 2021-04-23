@@ -5,13 +5,14 @@
 
 
 #define repp(i,n) for(int i=0;i<n;i++)
+#define nl printf("\n");
+#define tb printf("\t");
 
 void push(char *,int *,char);
 void isproduct(char,char);
 int ister(char);
 int isnter(char);
 int isstate(char);
-void error();
 void isreduce(char,char);
 char pop(char *,int *);
 void printt(char *,int *,char [],int);
@@ -46,22 +47,22 @@ const struct gotol G[12]={
     {"-1","-1","-1"},
     {"i","c","d"},
     {"-1","-1","-1"},
-    {"-1","j","d"},
-    {"-1","-1","k"},
+    {"-1","k","d"},
+    {"-1","-1","l"},
     {"-1","-1","-1"},
     {"-1","-1","-1"},
 };
 
 char ter[6]={'i','+','*',')','(','$'};
 char nter[3]={'E','T','F'};
-char states[12]={'a','b','c','d','e','f','g','h','m','j','k','l'};
+char states[12]={'a','b','c','d','e','f','g','h','j','k','l','m'};
 char stack[100];
 int top=-1;
 char temp[10];
 
 struct grammar{
     char left;
-    char right[5];
+    char right[10];
 };
 
 const struct grammar rl[6]={
@@ -94,49 +95,46 @@ void main(){
         p=stack[top];
         isproduct(x,p);
 
-        if(strcmp(temp,"-1")==0)
-            error();
+        if(strcmp(temp,"-1")==0){
+            printf("Error in the input");
+            exit(1);
+        }
 
         if(strcmp(temp,"acc")==0)
             break;
-        else{
-            if(temp[0]=='s'){
-                push(stack,&top,inp[i]);
-                push(stack,&top,temp[1]);
-                i++;
-            }else{
-                if(temp[0]=='r'){
-                    j=isstate(temp[1]);
+        else if(temp[0]=='s'){    
+            push(stack,&top,inp[i]);
+            push(stack,&top,temp[1]);
+            i++;
+        }else if(temp[0]=='r'){
+            j=isstate(temp[1]);
+            strcpy(temp,rl[j-2].right);
+            dl[0]=rl[j-2].left;
+            dl[1]='\0';
 
-                    strcpy(temp,rl[j-2].right);
-                    dl[0]=rl[j-2].left;
-                    dl[1]='\0';
+            n=strlen(temp);
 
-                    n=strlen(temp);
+            repp(k,2*n)
+                pop(stack,&top);
 
-                    repp(k,2*n)
-                        pop(stack,&top);
+            for(m=0;dl[m]!='\0';m++)
+                push(stack,&top,dl[m]);
 
-                    for(m=0;dl[m]!='\0';m++)
-                        push(stack,&top,dl[m]);
+            l=top;
+            y=stack[l-1];
+            isreduce(y,dl[0]);
 
-                    l=top;
-                    y=stack[l-1];
-                    isreduce(y,dl[0]);
-
-                    for(m=0;temp[m]!='\0';m++)
-                        push(stack,&top,temp[m]);
-                }
-            }
+            for(m=0;temp[m]!='\0';m++)
+                push(stack,&top,temp[m]);
         }
-
-    printt(stack,&top,inp,i);
+        printt(stack,&top,inp,i);
     }while(inp[i]!='\0');
 
+    nl;
     if(strcmp(temp,"acc")==0)
-        printf(" \nInput accepted");
+        printf("Input accepted");
     else
-    printf(" \nInput not accepted.");
+        printf("Input not accepted.");
 }
 
 void push(char *s,int *sp,char item){
@@ -179,11 +177,6 @@ int isstate(char p){
     return 0;
 }
 
-void error(){
-    printf("Error in the input ");
-    exit(0);
-}
-
 void isreduce(char x,char p){
     int k=isstate(x);
     int l=isnter(p);
@@ -222,8 +215,7 @@ void printt(char *t,int *p,char inp[],int i){
         if(p_flag)
             printf("%c",t[r]);
     }
-
-    printf("\t\t\t");
+    tb;tb;tb;
 
     for(r=i;inp[r]!='\0';r++)
         printf("%c",inp[r]);
