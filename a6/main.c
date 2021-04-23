@@ -49,17 +49,9 @@ char G[12][3][5]={
     {"-1","-1","-1"},
 };
 
-char ter[6]={'i','+','*',')','(','$'};
-char nter[3]={'E','T','F'};
-char states[12]={'a','b','c','d','e','f','g','h','j','k','l','m'};
 char stack[100];
 int top=-1;
-char temp[10];
-
-struct grammar{
-    char left;
-    char right[10];
-};
+char tLine[10];
 
 int ister(char x){
     repp(i,6)
@@ -94,7 +86,7 @@ void isreduce(char x,char p){
     int k=isstate(x);
     int l=isnter(p);
 
-    strcpy(temp,G[k-1].r[l-1]);
+    strcpy(tLine,G[k-1][l-1]);
 }
 
 void push(char *s,int *sp,char item){
