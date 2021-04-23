@@ -1,6 +1,8 @@
 #include<stdio.h>
+#include<stdbool.h>
 #include<stdlib.h>
 #include<string.h>
+
 
 #define repp(i,n) for(int i=0;i<n;i++)
 
@@ -13,7 +15,6 @@ void error();
 void isreduce(char,char);
 char pop(char *,int *);
 void printt(char *,int *,char [],int);
-void rep(char [],int);
 
 struct action{
     char row[6][5];
@@ -209,21 +210,21 @@ void printt(char *t,int *p,char inp[],int i){
 
     printf("\n");
 
-    repp(r,*p+1)
-        rep(t,r);
+    repp(r,*p+1){
+        bool p_flag = true;
+        repp(ii, 12){
+            if(states[ii] == t[r]){
+                printf("%d", ii);
+                p_flag = false;
+                break;
+            }
+        }
+        if(p_flag)
+            printf("%c",t[r]);
+    }
 
     printf("\t\t\t");
 
     for(r=i;inp[r]!='\0';r++)
         printf("%c",inp[r]);
-}
-
-void rep(char t[],int r){
-    repp(i, 12){
-        if(states[i] == t[r]){
-            printf("%d", i);
-            return;
-        }
-    }
-    printf("%c",t[r]);
 }
