@@ -2,8 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 
+#define repp(i,n) for(int i=0;i<n;i++)
+
 void push(char *,int *,char);
-char stacktop(char *);
 void isproduct(char,char);
 int ister(char);
 int isnter(char);
@@ -19,18 +20,18 @@ struct action{
 };
 
 const struct action A[12]={
-    {"sf","emp","emp","se","emp","emp"},
-    {"emp","sg","emp","emp","emp","acc"},
-    {"emp","rc","sh","emp","rc","rc"},
-    {"emp","re","re","emp","re","re"},
-    {"sf","emp","emp","se","emp","emp"},
-    {"emp","rg","rg","emp","rg","rg"},
-    {"sf","emp","emp","se","emp","emp"},
-    {"sf","emp","emp","se","emp","emp"},
-    {"emp","sg","emp","emp","sl","emp"},
-    {"emp","rb","sh","emp","rb","rb"},
-    {"emp","rb","rd","emp","rd","rd"},
-    {"emp","rf","rf","emp","rf","rf"}
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","sg","-1","-1","-1","acc"},
+    {"-1","rc","sh","-1","rc","rc"},
+    {"-1","re","re","-1","re","re"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","rg","rg","-1","rg","rg"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","sg","-1","-1","sl","-1"},
+    {"-1","rb","sh","-1","rb","rb"},
+    {"-1","rb","rd","-1","rd","rd"},
+    {"-1","rf","rf","-1","rf","rf"}
 };
 
 struct gotol{
@@ -39,15 +40,15 @@ struct gotol{
 
 const struct gotol G[12]={
     {"b","c","d"},
-    {"emp","emp","emp"},
-    {"emp","emp","emp"},
-    {"emp","emp","emp"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
     {"i","c","d"},
-    {"emp","emp","emp"},
-    {"emp","j","d"},
-    {"emp","emp","k"},
-    {"emp","emp","emp"},
-    {"emp","emp","emp"},
+    {"-1","-1","-1"},
+    {"-1","j","d"},
+    {"-1","-1","k"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
 };
 
 char ter[6]={'i','+','*',')','(','$'};
@@ -89,10 +90,10 @@ void main(){
     do{
         x=inp[i];
 
-        p=stacktop(stack);
+        p=stack[top];
         isproduct(x,p);
 
-        if(strcmp(temp,"emp")==0)
+        if(strcmp(temp,"-1")==0)
             error();
 
         if(strcmp(temp,"acc")==0)
@@ -112,7 +113,7 @@ void main(){
 
                     n=strlen(temp);
 
-                    for(k=0;k<2*n;k++)
+                    repp(k,2*n)
                         pop(stack,&top);
 
                     for(m=0;dl[m]!='\0';m++)
@@ -146,25 +147,15 @@ void push(char *s,int *sp,char item){
     }
 }
 
-char stacktop(char *s){
-    char i;
-    i=s[top];
-    return i;
-}
-
 void isproduct(char x,char p){
-    int k,l;
-
-    k=ister(x);
-    l=isstate(p);
+    int k=ister(x);
+    int l=isstate(p);
 
     strcpy(temp,A[l-1].row[k-1]);
 }
 
 int ister(char x){
-    int i;
-
-    for(i=0;i<6;i++)
+    repp(i,6)
         if(x==ter[i])
             return i+1;
 
@@ -172,9 +163,7 @@ int ister(char x){
 }
 
 int isnter(char x){
-    int i;
-
-    for(i=0;i<3;i++)
+    repp(i,3)
         if(x==nter[i])
             return i+1;
 
@@ -182,9 +171,7 @@ int isnter(char x){
 }
 
 int isstate(char p){
-    int i;
-
-    for(i=0;i<12;i++)
+    repp(i, 12)
         if(p==states[i])
             return i+1;
 
@@ -197,10 +184,8 @@ void error(){
 }
 
 void isreduce(char x,char p){
-    int k,l;
-
-    k=isstate(x);
-    l=isnter(p);
+    int k=isstate(x);
+    int l=isnter(p);
 
     strcpy(temp,G[k-1].r[l-1]);
 }
@@ -224,7 +209,7 @@ void printt(char *t,int *p,char inp[],int i){
 
     printf("\n");
 
-    for(r=0;r<=*p;r++)
+    repp(r,*p+1)
         rep(t,r);
 
     printf("\t\t\t");
@@ -238,8 +223,8 @@ void rep(char t[],int r){
 
     c=t[r];
 
-    if(c<'h')printf("%d", c-'a');
-    else if(c)
+    // if(c<'h')printf("%d", c-'a');
+    // else if
 
     switch(c){
 
