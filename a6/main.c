@@ -17,48 +17,6 @@ void isreduce(char,char);
 char pop(char *,int *);
 void printt(char *,int *,char [],int);
 
-struct action{
-    char row[6][5];
-};
-
-const struct action A[12]={
-    {"sf","-1","-1","se","-1","-1"},
-    {"-1","sg","-1","-1","-1","acc"},
-    {"-1","rc","sh","-1","rc","rc"},
-    {"-1","re","re","-1","re","re"},
-    {"sf","-1","-1","se","-1","-1"},
-    {"-1","rg","rg","-1","rg","rg"},
-    {"sf","-1","-1","se","-1","-1"},
-    {"sf","-1","-1","se","-1","-1"},
-    {"-1","sg","-1","-1","sl","-1"},
-    {"-1","rb","sh","-1","rb","rb"},
-    {"-1","rb","rd","-1","rd","rd"},
-    {"-1","rf","rf","-1","rf","rf"}
-};
-
-struct gotol{
-    char r[3][4];
-};
-
-const struct gotol G[12]={
-    {"b","c","d"},
-    {"-1","-1","-1"},
-    {"-1","-1","-1"},
-    {"-1","-1","-1"},
-    {"i","c","d"},
-    {"-1","-1","-1"},
-    {"-1","k","d"},
-    {"-1","-1","l"},
-    {"-1","-1","-1"},
-    {"-1","-1","-1"},
-};
-
-char ter[6]={'i','+','*',')','(','$'};
-char nter[3]={'E','T','F'};
-char states[12]={'a','b','c','d','e','f','g','h','j','k','l','m'};
-char stack[100];
-int top=-1;
-char temp[10];
 
 struct grammar{
     char left;
@@ -74,9 +32,46 @@ const struct grammar rl[6]={
     {'F',"i"},
 };
 
-void main(){
+char ter[6]={'i','+','*',')','(','$'};
+char nter[3]={'E','T','F'};
+char states[12]={'a','b','c','d','e','f','g','h','j','k','l','m'};
 
-    char inp[100],dl[80];
+char actions[12][6][10]={
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","sg","-1","-1","-1","acc"},
+    {"-1","rc","sh","-1","rc","rc"},
+    {"-1","re","re","-1","re","re"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","rg","rg","-1","rg","rg"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"sf","-1","-1","se","-1","-1"},
+    {"-1","sg","-1","-1","sl","-1"},
+    {"-1","rb","sh","-1","rb","rb"},
+    {"-1","rb","rd","-1","rd","rd"},
+    {"-1","rf","rf","-1","rf","rf"}
+};
+
+char G[12][3][5]={
+    {"b","c","d"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
+    {"i","c","d"},
+    {"-1","-1","-1"},
+    {"-1","k","d"},
+    {"-1","-1","l"},
+    {"-1","-1","-1"},
+    {"-1","-1","-1"},
+};
+
+char stack[100];
+int top=-1;
+
+char tLine[10];
+
+
+void main(){
+    char inp[100];
 
     printf("Enter the input :");
     scanf("%s",inp);
@@ -91,27 +86,28 @@ void main(){
     printt(stack,&top,inp,0);
 
     int i = 0;
+    char dl[80];
     do{
         isproduct(inp[i],stack[top]);
 
-        if(strcmp(temp,"-1")==0){
+        if(strcmp(tLine,"-1")==0){
             printf("Error in the input");
             exit(1);
         }
 
-        if(strcmp(temp,"acc")==0)
+        if(strcmp(tLine,"acc")==0)
             break;
-        else if(temp[0]=='s'){    
+        else if(tLine[0]=='s'){    
             push(stack,&top,inp[i]);
-            push(stack,&top,temp[1]);
+            push(stack,&top,tLine[1]);
             i++;
-        }else if(temp[0]=='r'){
-            int j=isstate(temp[1]);
-            strcpy(temp,rl[j-2].right);
+        }else if(tLine[0]=='r'){
+            int j=isstate(tLine[1]);
+            strcpy(tLine,rl[j-2].right);
             dl[0]=rl[j-2].left;
             dl[1]='\0';
 
-            repp(k,2*strlen(temp))
+            repp(k,2*strlen(tLine))
                 pop(stack,&top);
 
             for(int m=0;dl[m]!='\0';m++)
@@ -119,14 +115,14 @@ void main(){
 
             isreduce(stack[top-1],dl[0]);
 
-            for(int m=0;temp[m]!='\0';m++)
-                push(stack,&top,temp[m]);
+            for(int m=0;tLine[m]!='\0';m++)
+                push(stack,&top,tLine[m]);
         }nl;
         printt(stack,&top,inp,i);
     }while(inp[i]!='\0');
 
     nl;
-    if(strcmp(temp,"acc")==0)
+    if(strcmp(tLine,"acc")==0)
         printf("Input accepted");
     else
         printf("Input not accepted.");
@@ -145,7 +141,7 @@ void isproduct(char x,char p){
     int k=ister(x);
     int l=isstate(p);
 
-    strcpy(temp,A[l-1].row[k-1]);
+    strcpy(tLine,actions[l-1][k-1]);
 }
 
 int ister(char x){
@@ -175,7 +171,7 @@ void isreduce(char x,char p){
     int k=isstate(x);
     int l=isnter(p);
 
-    strcpy(temp,G[k-1].r[l-1]);
+    strcpy(tLine,G[k-1][l-1]);
 }
 
 
