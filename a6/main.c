@@ -76,24 +76,23 @@ const struct grammar rl[6]={
 
 void main(){
 
-    char inp[80],x,p,dl[80],y,bl='a';
-    int i=0,j,k,l,n,m,c,len;
+    char inp[100],dl[80];
 
     printf("Enter the input :");
     scanf("%s",inp);
 
-    len=strlen(inp);
+    int len=strlen(inp);
     inp[len]='$';
     inp[len+1]='\0';
-    push(stack,&top,bl);
-    printf("\nStack \t\t\tInput");
-    printt(stack,&top,inp,i);
 
+    push(stack,&top,'a');
+
+    printf("\nStack \t\t\tInput\n");
+    printt(stack,&top,inp,0);
+
+    int i = 0;
     do{
-        x=inp[i];
-
-        p=stack[top];
-        isproduct(x,p);
+        isproduct(inp[i],stack[top]);
 
         if(strcmp(temp,"-1")==0){
             printf("Error in the input");
@@ -107,26 +106,22 @@ void main(){
             push(stack,&top,temp[1]);
             i++;
         }else if(temp[0]=='r'){
-            j=isstate(temp[1]);
+            int j=isstate(temp[1]);
             strcpy(temp,rl[j-2].right);
             dl[0]=rl[j-2].left;
             dl[1]='\0';
 
-            n=strlen(temp);
-
-            repp(k,2*n)
+            repp(k,2*strlen(temp))
                 pop(stack,&top);
 
-            for(m=0;dl[m]!='\0';m++)
+            for(int m=0;dl[m]!='\0';m++)
                 push(stack,&top,dl[m]);
 
-            l=top;
-            y=stack[l-1];
-            isreduce(y,dl[0]);
+            isreduce(stack[top-1],dl[0]);
 
-            for(m=0;temp[m]!='\0';m++)
+            for(int m=0;temp[m]!='\0';m++)
                 push(stack,&top,temp[m]);
-        }
+        }nl;
         printt(stack,&top,inp,i);
     }while(inp[i]!='\0');
 
@@ -157,7 +152,13 @@ int ister(char x){
     repp(i,6)
         if(x==ter[i])
             return i+1;
+    return 0;
+}
 
+int isstate(char p){
+    repp(i, 12)
+        if(p==states[i])
+            return i+1;
     return 0;
 }
 
@@ -169,13 +170,6 @@ int isnter(char x){
     return 0;
 }
 
-int isstate(char p){
-    repp(i, 12)
-        if(p==states[i])
-            return i+1;
-
-    return 0;
-}
 
 void isreduce(char x,char p){
     int k=isstate(x);
@@ -186,23 +180,15 @@ void isreduce(char x,char p){
 
 
 char pop(char *s,int *sp){
-    char item;
-
-    if(*sp==-1)
-        printf("Stack is empty ");
-    else{
-        item=s[*sp];
+    if(*sp!=-1){
         *sp=*sp-1;
+        return s[*sp+1];
     }
-
-    return item;
+    printf("Stack is empty ");
+    return '\0';
 }
 
 void printt(char *t,int *p,char inp[],int i){
-    int r;
-
-    printf("\n");
-
     repp(r,*p+1){
         bool p_flag = true;
         repp(ii, 12){
@@ -217,6 +203,5 @@ void printt(char *t,int *p,char inp[],int i){
     }
     tb;tb;tb;
 
-    for(r=i;inp[r]!='\0';r++)
-        printf("%c",inp[r]);
+    printf("%s", inp+i);
 }
