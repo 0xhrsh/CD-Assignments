@@ -139,7 +139,8 @@ int main(){
     bool changed = true;
     while(changed){
         changed = false;
-        repp(i, n){
+        for(int i = n-1; i>=0; i--){
+        // repp(i, n){
             for (auto& it : graph[i]){
                 repp(j, MAX_VARS){
                     bool new_val = out[i][j] || in[it][j];
@@ -150,7 +151,9 @@ int main(){
             }
 
             repp(j, MAX_VARS){
-                bool new_val = (use[i][j]) || (out[i][j] && (!def[i][j]));
+                bool new_val = false;
+                if(!def[i][j]) new_val = out[i][j];
+                new_val = new_val || use[i][j];
                 changed = changed || (in[i][j] != new_val);
 
                 in[i][j] = new_val;
